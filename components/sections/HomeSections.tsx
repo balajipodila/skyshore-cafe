@@ -233,7 +233,7 @@ export function StoryTeaser() {
     <section aria-labelledby="story" className="mx-3 sm:mx-6 max-w-7xl lg:mx-auto mt-14 grid gap-6 lg:grid-cols-12 items-start">
       <div className="lg:col-span-5 relative">
         <Image
-          src="/founder.jpg"
+          src="/founder-optimized.jpg"
           alt="Podila Balaji, founder of Skyshore"
           width={800}
           height={600}

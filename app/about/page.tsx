@@ -12,7 +12,7 @@ export default function AboutPage() {
       <section aria-labelledby="owner" className="mt-6 grid lg:grid-cols-12 gap-6 items-start">
         <div className="lg:col-span-4">
           <div className="relative overflow-hidden rounded-[24px] h-[420px]">
-            <Image src="/founder.jpg" alt="Podila Balaji, founder of Skyshore" fill className="object-cover" />
+            <Image src="/founder-optimized.jpg" alt="Podila Balaji, founder of Skyshore" fill className="object-cover" />
             <div className="absolute bottom-3 left-3 glass rounded-2xl px-4 py-3 max-w-[260px]">
               <p className="font-serif font-semibold">Podila Balaji (Bobby)</p>
               <p className="text-xs">Founder</p>
