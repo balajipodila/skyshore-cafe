@@ -1,0 +1,10 @@
+[
+  { "id": "chai-samosa", "name": "Chai + Samosa", "price": 49, "original": 75, "items": ["Masala Chai", "Samosa (2 pc)"], "tag": "Bestseller" },
+  { "id": "student", "name": "Student Combo", "price": 149, "original": 219, "items": ["Cold Coffee", "Veg Sandwich", "French Fries"], "tag": "Student" },
+  { "id": "couple", "name": "Couple Combo", "price": 349, "original": 489, "items": ["2 Cold Drinks", "Paneer Roll", "Choco Lava Cake"], "tag": "For two" },
+  { "id": "family", "name": "Family Combo", "price": 599, "original": 849, "items": ["Skyline Platter", "Pasta", "2 Samosas", "2 Cold Drinks"], "tag": "For four" },
+  { "id": "breakfast", "name": "Breakfast Combo", "price": 99, "original": 149, "items": ["Filter Coffee", "Vada Pav", "Buttermilk"], "tag": "Till 11 AM" },
+  { "id": "evening", "name": "Evening Snack Combo", "price": 129, "original": 189, "items": ["Masala Chai", "Bhel Puri", "Maggi"], "tag": "4–7 PM" },
+  { "id": "cold-sandwich", "name": "Cold Coffee + Sandwich", "price": 159, "original": 229, "items": ["Cold Coffee", "Grilled Sandwich"], "tag": "Classic" },
+  { "id": "buy2get1", "name": "Buy 2 Get 1 — Select Drinks", "price": 199, "original": 299, "items": ["Any 3 select drinks"], "tag": "Offer" }
+]

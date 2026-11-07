@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sky-50: #f4fbff;
+  --sand-50: #fff8ed;
+}
+* { -webkit-tap-highlight-color: transparent; }
+body {
+  @apply bg-[#FFF8ED] text-navy antialiased;
+  background: linear-gradient(180deg, #dff3fb 0%, #f4fbff 28%, #fff8ed 72%, #fdf1dc 100%);
+}
+.dark body {
+  background: linear-gradient(180deg, #0b1a2b 0%, #12263a 55%, #1e3a53 100%);
+  @apply text-white;
+}
+
+.glass {
+  background: rgba(255,255,255,0.62);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.65);
+  box-shadow: 0 8px 32px rgba(18,38,58,0.10);
+  transform: translateZ(0);
+}
+.dark .glass {
+  background: rgba(11,26,43,0.60);
+  border-color: rgba(255,255,255,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  transform: translateZ(0);
+}
+
+.text-balance { text-wrap: balance; }
+
+:focus-visible {
+  outline: 2px solid #3FA9C4;
+  outline-offset: 3px;
+  border-radius: 9999px;
+}
+
+/* Cross-browser dark select options — fixes white-on-white dropdown in dark mode */
+.dark select {
+  color-scheme: dark;
+}
+.dark select option {
+  background-color: #12263a;
+  color: #ffffff;
+}
+.dark input,
+.dark textarea {
+  color-scheme: dark;
+}
+
+/* Perf: avoid painted blur on large vertical stacks — use a lighter glass on menu grids */
+.glass-soft {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: 0 8px 24px rgba(18,38,58,0.08);
+}
+.dark .glass-soft {
+  background: rgba(11,26,43,0.65);
+  border-color: rgba(255,255,255,0.12);
+}
+
+/* CSS Animations replacing Framer Motion */
+@keyframes slow-zoom-in-out {
+  0%, 100% { transform: scale(1.02); }
+  50% { transform: scale(1.05); }
+}
+.animate-parallax-slow {
+  animation: slow-zoom-in-out 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

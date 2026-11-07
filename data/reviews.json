@@ -1,0 +1,7 @@
+[
+  { "id": "r1", "name": "Ananya Rao", "city": "Visakhapatnam", "rating": 5, "dish": "Sunset Sky Mocktail", "text": "The Sunset Sky tastes like a Goa sunset in a glass. Ordered it after a beach walk — perfect.", "date": "2026-11-02" },
+  { "id": "r2", "name": "Rohit Verma", "city": "Bengaluru", "rating": 5, "dish": "Filter Coffee", "text": "Proper decoction, not watery. Reminds me of home. The wave points kept me coming back.", "date": "2026-10-28" },
+  { "id": "r3", "name": "Farah Khan", "city": "Hyderabad", "rating": 4, "dish": "Pav Bhaji", "text": "Spicy, buttery, generous. My daughter loved the mild version. Staff is so kind.", "date": "2026-10-20" },
+  { "id": "r4", "name": "Srinivas P.", "city": "Chennai", "rating": 5, "dish": "Chai + Samosa Combo", "text": "₹49 for chai and samosa is unbeatable near office. Hot, fast, honest taste.", "date": "2026-10-15" },
+  { "id": "r5", "name": "Meera Nair", "city": "Kochi", "rating": 5, "dish": "Tender Coconut Cooler", "text": "Light, refreshing, not overly sweet. Exactly what I needed after the humidity.", "date": "2026-10-08" }
+]
