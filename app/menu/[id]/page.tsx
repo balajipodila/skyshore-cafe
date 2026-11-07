@@ -25,7 +25,7 @@ export default function ProductDetailPage() {
     <div className="mx-3 sm:mx-6 max-w-6xl lg:mx-auto">
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="relative overflow-hidden rounded-[28px] h-[380px] lg:h-[520px]">
-          <Image src={item.image} alt={item.name} fill className="object-cover" />
+          <Image src={item.image} alt={item.name} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
           <span className="absolute top-4 left-4 glass rounded-full px-3 py-1.5 text-sm font-semibold">
             {item.nutrition.calories} kcal · {item.label}
           </span>

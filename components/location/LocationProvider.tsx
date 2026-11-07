@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useLocation } from "@/store/location";
+import { useLocation, hydrateLocationStore } from "@/store/location";
 import { nearestOutlet } from "@/lib/location";
 import { DEFAULT_OUTLET_ID } from "@/lib/menu";
 
@@ -9,6 +9,9 @@ export function LocationProvider() {
   const setOutletId = useLocation((s) => s.setOutletId);
 
   useEffect(() => {
+    // Load persisted outlet only after mount to avoid SSR/CSR mismatch
+    hydrateLocationStore();
+
     let dismissed: string | null = null;
     try {
       dismissed = localStorage.getItem("skyshore-loc-dismissed");
@@ -38,7 +41,6 @@ export function LocationProvider() {
         } catch {}
       },
       () => {
-        // deny / error -> silent fallback to default
         setOutletId(DEFAULT_OUTLET_ID);
         try {
           localStorage.setItem("skyshore-loc-dismissed", "1");

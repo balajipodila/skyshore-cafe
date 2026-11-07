@@ -11,6 +11,7 @@
 body {
   @apply bg-[#FFF8ED] text-navy antialiased;
   background: linear-gradient(180deg, #dff3fb 0%, #f4fbff 28%, #fff8ed 72%, #fdf1dc 100%);
+  overscroll-behavior-y: none;
 }
 .dark body {
   background: linear-gradient(180deg, #0b1a2b 0%, #12263a 55%, #1e3a53 100%);

@@ -136,7 +136,7 @@ export function ChefSpecial() {
     <section aria-labelledby="chef" className="mx-3 sm:mx-6 max-w-7xl lg:mx-auto mt-10">
       <div className="glass rounded-[28px] overflow-hidden grid lg:grid-cols-2">
         <div className="relative h-64 lg:h-[420px]">
-          <Image src={item.image} alt={item.name} fill className="object-cover" />
+          <Image src={item.image} alt={item.name} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
           <div className="absolute top-4 left-4 flex gap-2">
             <Badge tone="coral">Chef&apos;s special</Badge>
             {item.premium && <Badge>Premium</Badge>}

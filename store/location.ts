@@ -9,7 +9,7 @@ type LocationState = {
 
 const STORAGE_KEY = "skyshore-outlet";
 
-function initialOutlet(): string {
+function getStoredOutlet(): string {
   if (typeof window === "undefined") return DEFAULT_OUTLET_ID;
   try {
     return window.localStorage.getItem(STORAGE_KEY) || DEFAULT_OUTLET_ID;
@@ -18,8 +18,10 @@ function initialOutlet(): string {
   }
 }
 
+// Always start with the default on both server and client to prevent hydration mismatch.
+// The correct local outlet is loaded in a useEffect after mount (LocationProvider).
 export const useLocation = create<LocationState>((set) => ({
-  outletId: initialOutlet(),
+  outletId: DEFAULT_OUTLET_ID,
   setOutletId: (id) => {
     try {
       window.localStorage.setItem(STORAGE_KEY, id);
@@ -27,3 +29,11 @@ export const useLocation = create<LocationState>((set) => ({
     set({ outletId: id });
   },
 }));
+
+// Expose helper for hydration after mount
+export function hydrateLocationStore() {
+  const stored = getStoredOutlet();
+  if (stored) {
+    useLocation.setState({ outletId: stored });
+  }
+}
