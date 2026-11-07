@@ -32,7 +32,7 @@ export function Hero() {
 
       <div className="relative z-10 flex h-full min-h-[540px] sm:min-h-[600px] flex-col justify-end p-6 sm:p-10 lg:p-14 pb-16 animate-fade-in-up">
         <div className="glass rounded-[24px] p-6 sm:p-8 max-w-2xl">
-          <p className="text-xs tracking-[0.24em] uppercase font-semibold text-skyx-700 dark:text-skyx-200">
+          <p className="text-xs tracking-[0.24em] uppercase font-semibold text-skyx-700 dark:text-skyx-200 animate-pulse-soft">
             Skyshore Café · Vizag to Delhi
           </p>
           <h1 className="mt-2 font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] text-balance">
@@ -49,9 +49,32 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="mt-5 flex items-center gap-4 text-sm">
+          <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
             <Rating value={4.8} />
             <span className="text-navy/60 dark:text-white/70">4.8 · 12k+ reviews</span>
+            <span className="flex items-center gap-1.5 ml-2">
+              <span className="size-2 rounded-full bg-emerald-500 animate-ping" />
+              <span className="text-xs font-bold text-emerald-500">
+                142 brewing now
+              </span>
+            </span>
+          </div>
+
+          <div className="mt-6 pt-4 border-t border-navy/10 dark:border-white/10 flex items-center justify-between">
+            <div className="flex -space-x-2.5 animate-fade-in">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <img
+                  key={i}
+                  src={`https://i.pravatar.cc/64?u=customer${i}@skyshore.cafe`}
+                  alt={`Customer ${i}`}
+                  className="rounded-full border-2 border-white dark:border-navy size-8 h-8 object-cover animate-float-slow hover:scale-110 transition-transform"
+                  style={{ animationDelay: `${i * 0.3}s` }}
+                />
+              ))}
+            </div>
+            <div className="text-right">
+              <p className="text-xs text-navy/60 dark:text-white/60">Join 12,400+ sea lovers this week</p>
+            </div>
           </div>
         </div>
       </div>

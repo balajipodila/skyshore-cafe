@@ -11,18 +11,17 @@ export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: s
   const basePrice = item.sizes[0]?.price ?? 0;
 
   return (
-    <article
-      className="group glass-soft rounded-[22px] overflow-hidden p-0 hover:-translate-y-1 transition"
-    >
+    <article className="group glass-soft rounded-[22px] overflow-hidden p-0 hover:-translate-y-1.5 hover:shadow-lift transition-all duration-300 animate-fade-in-up">
       <div className="relative h-48 overflow-hidden">
         <Image
           src={item.image}
           alt={item.name}
           fill
-          className="object-cover group-hover:scale-[1.05] transition duration-500"
+          className="object-cover group-hover:scale-[1.08] transition duration-700"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        <span className="absolute top-3 left-3 glass rounded-full px-2.5 py-1 text-xs font-semibold">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <span className="absolute top-3 left-3 glass rounded-full px-2.5 py-1 text-xs font-semibold group-hover:scale-105 transition-transform">
           {item.nutrition.calories} kcal · {item.label}
         </span>
         <span className="absolute top-3 right-3 rounded-full bg-white/80 backdrop-blur px-2.5 py-1 text-xs font-bold">
@@ -31,7 +30,7 @@ export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: s
         {(item.premium || localCity) && (
           <span className="absolute bottom-3 left-3 flex gap-1.5">
             {item.premium && (
-              <span className="rounded-full bg-coral text-white px-2.5 py-1 text-xs font-bold">Premium</span>
+              <span className="rounded-full bg-coral text-white px-2.5 py-1 text-xs font-bold animate-float-slow">Premium</span>
             )}
             {localCity && (
               <span className="glass rounded-full px-2.5 py-1 text-xs font-bold">Only at {localCity}</span>
@@ -42,7 +41,9 @@ export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: s
 
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-serif text-xl font-semibold leading-tight">{item.name}</h3>
+          <h3 className="font-serif text-xl font-semibold leading-tight group-hover:text-skyx-700 dark:group-hover:text-skyx-300 transition-colors">
+            {item.name}
+          </h3>
           <span className="font-bold text-lg whitespace-nowrap">{formatINR(basePrice)}</span>
         </div>
         <p className="mt-2 text-sm text-navy/70 dark:text-white/70 leading-relaxed line-clamp-2">
@@ -59,7 +60,7 @@ export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: s
         <div className="mt-4 flex items-center gap-2">
           <Link
             href={`/menu/${item.id}`}
-            className="flex-1 text-center rounded-full py-2.5 text-sm font-semibold border border-navy/10 dark:border-white/15 hover:bg-white/50 dark:hover:bg-white/10 transition"
+            className="flex-1 text-center rounded-full py-2.5 text-sm font-semibold border border-navy/10 dark:border-white/15 hover:bg-white/50 dark:hover:bg-white/10 transition hover:border-skyx-400"
             aria-label={`View ${item.name}`}
           >
             View
@@ -69,7 +70,7 @@ export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: s
             onClick={() =>
               add({ id: item.id, name: item.name, price: basePrice, qty: 1, size: item.sizes[0]?.label, image: item.image })
             }
-            className="flex-1 rounded-full bg-navy text-white dark:bg-white dark:text-navy py-2.5 text-sm font-semibold hover:bg-coral hover:text-white transition"
+            className="flex-1 rounded-full bg-navy text-white dark:bg-white dark:text-navy py-2.5 text-sm font-semibold hover:bg-coral hover:text-white hover:scale-[1.02] active:scale-95 transition-all shadow-sm hover:shadow-md"
             aria-label={`Add ${item.name} to cart`}
           >
             Quick add

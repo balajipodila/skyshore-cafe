@@ -113,3 +113,88 @@ body {
 .animate-slide-in-right {
   animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Real-looking animations */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.35) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s infinite;
+}
+
+@keyframes wave-drift {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(12px) rotate(1.5deg); }
+  75% { transform: translateX(-12px) rotate(-1.5deg); }
+}
+.animate-wave-drift {
+  animation: wave-drift 8s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.85); }
+  60% { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.animate-pop-in {
+  animation: pop-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes steam-rise {
+  0% { transform: translateY(0) scale(0.85); opacity: 0; }
+  15% { opacity: 0.7; }
+  50% { transform: translateY(-14px) scale(1.15) translateX(-4px); opacity: 0.5; }
+  100% { transform: translateY(-28px) scale(1.35) translateX(4px); opacity: 0; }
+}
+.animate-steam {
+  animation: steam-rise 3.2s ease-out infinite;
+}
+
+@keyframes bell-ring {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30%, 50% { transform: rotate(18deg); }
+  20%, 40%, 60% { transform: rotate(-18deg); }
+  70% { transform: rotate(10deg); }
+  80% { transform: rotate(-8deg); }
+  90% { transform: rotate(3deg); }
+}
+.animate-bell {
+  animation: bell-ring 1.2s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes wave-top {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-25%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-wave-top {
+  animation: wave-top 7s linear infinite;
+}
+
+@keyframes count-tick {
+  0% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+.animate-count-tick {
+  animation: count-tick 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -86,7 +86,7 @@ export default function ContactPage() {
         <GlassCard>
           <h2 className="font-serif text-2xl font-semibold">Write to us</h2>
           <p className="text-xs text-navy/60 dark:text-white/60 mt-0.5">
-            Your message will be sent to <strong>{OFFICIAL_EMAIL}</strong> with instant SMS/Email confirmation to you.
+            We&apos;ll review your inquiry and reply with instant confirmation to your contact.
           </p>
 
           {submitted ? (
@@ -156,7 +156,7 @@ export default function ContactPage() {
                 disabled={loading}
                 className="sm:col-span-2 rounded-full bg-coral text-white py-3.5 font-semibold text-sm hover:bg-coral-dark transition shadow-soft disabled:opacity-50"
               >
-                {loading ? "Sending..." : `Send to ${OFFICIAL_EMAIL}`}
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
           )}
