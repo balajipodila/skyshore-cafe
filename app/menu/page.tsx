@@ -7,7 +7,7 @@ import { useLocation } from "@/store/location";
 import { getOutlet } from "@/lib/menu";
 import { useOutletMenu, useLocalIds } from "@/hooks/useOutletMenu";
 
-const CATS = ["All", "Hot Drinks", "Cold Drinks", "Snacks", "Meals & Bakery", "Signature"];
+const CATS = ["All", "drink", "snack", "meal", "dessert", "Signature"];
 
 export default function MenuPage() {
   const outletId = useLocation((s) => s.outletId);
@@ -25,7 +25,13 @@ export default function MenuPage() {
 
   const items = useMemo(() => {
     let list = outletMenu.slice();
-    if (cat !== "All") list = list.filter((m) => m.category === cat);
+    if (cat !== "All") {
+      if (cat === "drink") list = list.filter((m) => m.category === "drink");
+      else if (cat === "snack") list = list.filter((m) => m.category === "snack");
+      else if (cat === "meal") list = list.filter((m) => m.category === "meal");
+      else if (cat === "dessert") list = list.filter((m) => m.category === "dessert");
+      else if (cat === "Signature") list = list.filter((m) => m.premium || m.tags.includes("signature"));
+    }
     if (q) list = list.filter((m) => (m.name + m.description + m.tags.join(" ")).toLowerCase().includes(q.toLowerCase()));
     if (filters.veg) list = list.filter((m) => m.veg);
     if (filters.nonVeg) list = list.filter((m) => !m.veg);
@@ -62,10 +68,10 @@ export default function MenuPage() {
                 key={c}
                 type="button"
                 onClick={() => { setCat(c); setLimit(24); }}
-                className={`rounded-full px-4 py-2 text-sm font-semibold min-h-[40px] transition ${cat === c ? "bg-navy text-white dark:bg-white dark:text-navy shadow-sm" : "bg-white/70 dark:bg-white/10 hover:bg-white"}`}
+                className={`rounded-full px-4 py-2 text-sm font-semibold min-h-[44px] transition ${cat === c ? "bg-navy text-white dark:bg-white dark:text-navy shadow-sm" : "bg-white/70 dark:bg-white/10 hover:bg-white"}`}
                 aria-pressed={cat === c}
               >
-                {c}
+                {c === "drink" ? "Hot Drinks" : c === "snack" ? "Snacks" : c === "meal" ? "Meals & Bakery" : c === "dessert" ? "Desserts" : c}
               </button>
             ))}
           </div>
@@ -77,7 +83,7 @@ export default function MenuPage() {
               value={q}
               onChange={(e) => { setQ(e.target.value); setLimit(24); }}
               placeholder="Try “cold” or “chai”…"
-              className="mt-1 w-full rounded-full bg-white/80 dark:bg-white/10 px-4 py-2.5 text-sm outline-none border border-navy/10 dark:border-white/15"
+              className="mt-1 w-full rounded-full bg-white/80 dark:bg-white/10 px-4 py-2.5 text-sm outline-none border border-navy/10 dark:border-white/15 min-h-[44px]"
             />
           </div>
 
@@ -93,7 +99,7 @@ export default function MenuPage() {
                 ["under100", "Under ₹100"],
                 ["under200", "Under ₹200"],
               ].map(([key, label]) => (
-                <label key={key} className="inline-flex items-center gap-2 rounded-full px-2 py-1 hover:bg-white/50 cursor-pointer">
+                <label key={key} className="inline-flex items-center gap-2 rounded-full px-2 py-1 hover:bg-white/50 cursor-pointer min-h-[44px]">
                   <input
                     type="checkbox"
                     checked={filters[key]}
@@ -112,7 +118,7 @@ export default function MenuPage() {
               id="sort"
               value={sort}
               onChange={(e) => setSort(e.target.value as typeof sort)}
-              className="mt-1 w-full rounded-full bg-white/80 dark:bg-white/10 px-4 py-2.5 text-sm outline-none border border-navy/10 dark:border-white/15"
+              className="mt-1 w-full rounded-full bg-white/80 dark:bg-white/10 px-4 py-2.5 text-sm outline-none border border-navy/10 dark:border-white/15 min-h-[44px]"
             >
               <option value="popular">Most popular</option>
               <option value="priceLow">Price: low to high</option>
@@ -145,7 +151,7 @@ export default function MenuPage() {
                   <button
                     type="button"
                     onClick={() => setLimit((prev) => prev + 24)}
-                    className="rounded-full glass px-8 py-3 text-sm font-semibold shadow-soft hover:bg-white dark:hover:bg-white/20 transition hover:-translate-y-0.5"
+                    className="rounded-full glass px-8 py-3 text-sm font-semibold shadow-soft hover:bg-white dark:hover:bg-white/20 transition hover:-translate-y-0.5 min-h-[44px]"
                   >
                     Load More ({items.length - visibleItems.length} more)
                   </button>

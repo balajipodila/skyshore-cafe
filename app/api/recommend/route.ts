@@ -3,6 +3,19 @@ import { menuForOutlet } from "@/lib/menu";
 
 export const dynamic = "force-dynamic";
 
+// Simple in-memory rate limiter: 20 req/min per IP
+const RATE_LIMIT = new Map<string, number[]>();
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const window = 60_000;
+  const arr = RATE_LIMIT.get(ip) || [];
+  const recent = arr.filter((t) => now - t < window);
+  if (recent.length >= 20) return false;
+  recent.push(now);
+  RATE_LIMIT.set(ip, recent);
+  return true;
+}
+
 function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet>) {
   const text = String(prompt || "").toLowerCase();
 
@@ -95,9 +108,14 @@ function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet
 }
 
 export async function POST(req: Request) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429, headers: { "Cache-Control": "no-store" } });
+  }
+
   const body = await req.json();
-  const prompt: string = body.prompt ?? body.query ?? "";
-  const outletId: string = body.outletId ?? "vizag-beach-road";
+  const prompt: string = String(body.prompt ?? body.query ?? "").slice(0, 300);
+  const outletId: string = String(body.outletId ?? "vizag-beach-road").slice(0, 50);
   const menu = menuForOutlet(outletId);
 
   console.log("[recommend] query:", JSON.stringify(prompt), "outletId:", outletId, "menuSize:", menu.length);

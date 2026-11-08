@@ -1,145 +1,97 @@
 # Skyshore Café — Where the Sky Meets the Sea
 
-A production-quality, multi-page café website for a fictional beach-inspired café chain.
+A calm beachside café chain across India — affordable chai to signature Sunset Skies, with outlet-aware menus, AI recommendations, daily rotations, and a glassmorphism premium UI.
 
-**Live target:** Vercel (`vercel --prod`)
+## Project Overview
 
-## Stack
-
-- **Next.js 14 (App Router) + TypeScript**
-- **Tailwind CSS** (design tokens in `tailwind.config.ts`)
-- **Framer Motion** (hero parallax, page reveals, cart + chat)
-- **Zustand** (cart state, drawer)
-- **Local JSON data** in `data/` — ready to swap for Prisma + Postgres:
-  - `menu.json`, `outlets.json`, `reviews.json`, `recipes.json`, `combos.json`
-- **Claude API** via `app/api/recommend/route.ts` (server-only; `ANTHROPIC_API_KEY` in `.env.local`)
-
-## Quick start
-
-```bash
-git clone https://github.com/<you>/skyshore-cafe.git
-cd skyshore-cafe
-npm install
-cp .env.local.example .env.local   # add ANTHROPIC_API_KEY
-npm run dev                        # http://localhost:3000
-npm run build                      # production build
-```
-
-Without an API key, the recommender falls back to local keyword matching — the UI still works end-to-end for demos.
-
-## Pages
-
-| Page | Route |
+| Layer | Detail |
 |---|---|
-| Home | `/` |
-| Menu | `/menu` |
-| Product detail | `/menu/[id]` |
-| Combos & Offers | `/combos` |
-| Checkout | `/checkout` |
-| Order tracking | `/order/track` |
-| Recipes | `/recipes` |
-| Outlets | `/outlets` |
-| About | `/about` |
-| Feedback | `/feedback` |
-| Contact | `/contact` |
-| Account | `/account` |
-| Dashboard (mock admin) | `/dashboard` |
-| AI recommend API | `/api/recommend` |
+| Design system | Sky blues, aqua, sand beige, coral accent, deep navy. Fraunces serif headings, Inter body. Frosted-glass UI, wave dividers, parallax hero, dark-mode night sea. |
+| Data | `data/menu.json` (87 items, core 63 + 21 local), `data/outlets.json` (12 outlets), `data/recipes.json` (10 recipes), `data/reviews.json`, `data/combos.json`. Structure mirrors future Prisma + Postgres models (core/local split). |
+| Pages | Home, Menu, Product detail, Combos, Checkout, Order tracking, Recipes (+ detail + articles), Outlets, About, Feedback, Contact, Account, Dashboard, Login/Signup. |
+| State | Zustand stores for cart (`store/cart.ts`), location (`store/location.ts`), orders (`store/order.ts`), auth (`store/auth.ts`). |
+| AI | `/api/recommend` — server-only OpenAI-compatible call (`AI_BASE_URL`/`AI_API_KEY`/`AI_MODEL` in `.env.local`, fallback otherwise). |
+| Fonts | Google Fonts (Fraunces + Inter) loaded in `app/layout.tsx`. |
 
-## Folder structure
+## Features
 
-```
-app/                  # App Router pages + API routes
-components/
-  ui/                 # Button, GlassCard, Badge, Rating, Logo, ProductCard, WaveDivider
-  sections/           # Home sections
-  layout/             # Nav, Footer
-  cart/               # Glass cart drawer
-  chat/               # AI recommender chat
-data/                 # JSON: menu, outlets, reviews, recipes, combos
-store/                # Zustand stores (cart)
-lib/                  # Types, data helpers
-tailwind.config.ts     # Design tokens: skyx, aqua, sand, coral, navy
-```
-
-## Design system
-
-**Palette (Tailwind tokens)**
-- Sky: `#3FA9C4` · Soft aqua `#7FD1C0` · Sand `#FFF8ED` / `#E9D5B8`
-- Coral accent `#FF7A6B` · Deep navy text `#12263A`
-- Dark mode = deep night-sea (`#0B1A2B` → `#1E3A53`)
-
-**Typography**
-- Headings: Fraunces (elegant serif)
-- Body: Inter (clean sans)
-
-**Glassmorphism**
-`.glass` = translucent white, `backdrop-blur + saturate`, thin light border, soft shadow. Used for nav, cards, cart drawer, chat panel, dashboards.
-
-**Signature details**
-- Wave dividers, overlapping glass panels, parallax hero, micro-interactions (`hover:-translate-y-1`), asymmetric story section, varied card layouts.
-- No purple gradient heroes, no identical grids, no emoji icons (SVG icons in `Rating` / `Logo`), no lorem ipsum.
-
-## AI features (server-route only)
-
-1. **Menu recommender** (`/api/recommend`) — sends menu JSON to Claude, requests **structured JSON** (`{"items":[...ids], "reason":"..."}`), validates IDs against `menu.json` before rendering product cards.
-2. **Smart pairing** in cart/checkout — copy suggests a matching snack/drink with one-tap add.
-
-## Accessibility & performance checklist
-
-- [x] Semantic landmarks (`header`, `main`, `footer`, `nav`, `section` with `aria-labelledby`)
-- [x] Skip-to-content link, visible focus ring (`#3FA9C4`)
-- [x] Glass text uses dark navy on light, high-contrast white on dark (`WCAG AA`)
-- [x] `aria-label` on icon buttons, `alt` on all images, `aria-pressed` / `aria-expanded` on toggles
-- [x] Keyboard navigable tabs/filters; drawer is `role="dialog"`
-- [x] Mobile-first, 44px+ touch targets, responsive 360px → 1440px
-- [x] `next/image` with `sizes`, lazy below-the-fold images, lazy-loaded routes
-- [x] SEO metadata + Open Graph, `sitemap.ts`, `robots.ts`, `loading/error/not-found` boundaries
-- [x] Skeleton loaders, empty states, toast-friendly optimistic cart
-
-**Performance targets:** Lighthouse 90+ (images optimised via Unsplash `w=` params, minimal client JS — only cart/nav/chat are client components).
-
-## Images
-
-All photography via **Unsplash** (free to use). Representative URLs (see `data/*.json` for full list):
-
-- Beach: `https://images.unsplash.com/photo-1507525428034-b723cf961d3e`
-- Chai/coffee, café interiors, food, mocktails — `photo-1571934811356`, `photo-1522992319`, `photo-1544145945`, `photo-1559925393`, etc.
-
-Attribution in footer. Replace with your own CDN URLs before launch.
-
-## Deployment (Vercel)
-
-```bash
-npm i -g vercel
-vercel env add ANTHROPIC_API_KEY production
-vercel --prod
-```
-
-Set `ANTHROPIC_API_KEY` in the Vercel dashboard under Environment Variables.
+- **Outlet-aware menu**: 63 core items + each city's local items only (no cross-city leakage). `Only at {city}` badge. 25+ items guaranteed. Console logs outlet once per change.
+- **Daily rotation**: deterministic seed `YYYY-MM-DD + outletId`. Today’s Combos (4), Today’s Specials (3), Chef’s Special (premium/signature/local only — never plain burgers/pizza). Skeleton-first, `?date=` override in dev.
+- **AI recommender**: compact menu context, temp 0.3, 10s timeout, strict JSON parsing, id validation, price enforcement in code, max 4 items. Fallback = keyword + price + veg + hot/cold filter with “Basic search” label. Supports English/Telugu/Hindi/Tenglish.
+- **Cart drawer**: focus trap across all focusable elements (not just close), Esc closes, returns focus to trigger, `aria-modal`, sheet + popup notification.
+- **Checkout**: coupon (`WAVE10`/`FIRSTSIP`), pickup/delivery toggle, validated address (phone, 6-digit pincode, city check), free delivery above ₹299 (₹29 otherwise), mock UPI/Card/COD, order persisted in Zustand + localStorage.
+- **Order tracking**: 5-step animation (Received → Brewing & Baking → Packed → Out for delivery → Delivered) driven by a timer, ETA, reachable after checkout.
+- **Recipes**: 10 recipes (chai, cold coffee, mango lassi, mirchi bajji, samosa, pav bhaji, pasta, dessert, mocktail, signature) each with story, ingredients, steps, prep time, serves, difficulty, nutrition, linked item id, own image. Detail page `/recipes/[id]`. “Behind the counter” articles page `/recipes/articles` (3 articles).
+- **Outlets**: 12 fictional branches across Indian cities with geolocation (Haversine), lat/lng, timings, phone, “Get directions”.
+- **Feedback & Reviews**: star rating, dish selection, photo upload UI, recent reviews, rating distribution bar.
+- **Account dashboard**: order history, reorder, saved addresses, favourites, Wave Points.
+- **Admin dashboard**: mock analytics (revenue, orders, bestsellers, outlet sales).
+- **Auth**: mock Zustand-only sign-in (no OAuth), glass modal with email + “Continue with Google (Demo)”, Esc closes, sign out.
 
 ## Screenshots
 
-> Add real screenshots after `npm run dev`:
-> - Home (hero + glass panel)
-> - Menu filters
-> - Cart drawer
-> - AI recommender chat
->
-> Place them in `public/screenshots/` and link here.
+> Placeholder — add real captures under `public/screenshots/` before public launch.
+- `public/screenshots/home.jpg` — Hero, today’s specials, combo strip, story teaser.
+- `public/screenshots/menu.jpg` — Category tabs, search, filters, outlet locals.
+- `public/screenshots/cart.jpg` — Glass cart drawer with totals.
+- `public/screenshots/checkout.jpg` — Validation states, coupon, payment options.
+- `public/screenshots/track.jpg` — Animated order steps + ETA.
 
-### Status
+## Tech Stack
 
-✅ **Build passes** (`npm run build` green) · ✅ Dev server runs on `http://localhost:3000`
+- **Next.js 14 (App Router) + TypeScript + Tailwind CSS**
+- **Zustand** (cart, location, orders, auth)
+- **Next/Image** with `next/image` sizes & remotePatterns
+- **Local JSON** data (Prisma-ready)
+- **AI**: OpenAI-compatible server route (`/api/recommend`)
 
-Screenshots will be added after the visual Home checkpoint review.
+## Setup Steps
 
-## Coupons & delivery rules (demo)
+```bash
+git clone https://github.com/balajipodila/skyshore-cafe.git
+cd skyshore-cafe
+npm install
+cp .env.example .env.local   # then paste your AI_* keys (leave blank for fallback)
+npm run dev                  # http://localhost:3000
+```
 
-- Codes: `WAVE10` (10% off), `FIRSTSIP` (₹100 off)
-- Free delivery above ₹299, otherwise ₹29 · ETA 25–40 min
-- Happy hour: weekday 4–6 PM, 20% off select cold drinks
+Without `AI_API_KEY`, the recommender falls back to strict keyword filtering (Basic search label) — UI still works.
 
-## License
+## Environment Variables (names, no values)
 
-Fictional brand for demonstration. Founder profile on `/about` is placeholder content (marked in code comments).
+```
+AI_BASE_URL   # e.g. http://localhost:20128/v1
+AI_API_KEY    # server-only, never exposed to client
+AI_MODEL      # e.g. auto / gpt-4o-mini
+```
+
+## Deploy Steps for Vercel
+
+```bash
+vercel login
+vercel env add AI_BASE_URL production      # paste same localhost-compatible endpoint or cloud URL
+vercel env add AI_API_KEY production       # paste server key
+vercel env add AI_MODEL production
+vercel deploy --prod
+```
+
+Or: import `balajipodila/skyshore-cafe` in Vercel dashboard → **Add New Project** → **Import Git Repository** → **Deploy**. Auto-detects Next.js from `package.json`.
+
+## Image Credits
+
+| Source | Host allowed | Usage |
+|---|---|---|
+| Unsplash | images.unsplash.com | Hero, menu items, recipes, outlets (free with attribution) |
+| Pexels | images.pexels.com | Chai/snack photos (free with attribution) |
+
+Photography is demo placeholder content. Replace `remotePatterns` with your CDN before production. Attributions are in `data/*.json` image URLs.
+
+## Known Limitations
+
+- **Mock auth**: Zustand-only (no sessions, no OAuth). User not persisted across devices.
+- **Mock payment**: UPI/Card/COD UI only — no real charges.
+- **Mock notifications**: `/api/order/notify` returns local confirmation only — no SMTP/SMS/WhatsApp dispatch.
+- **Fictional data**: All 12 outlets are fictional. Locations, menus and reviews are demo content.
+- **AI**: Without `AI_API_KEY` or with HTTP errors, recommender falls back to strict keyword filter (“Basic search”).
+
+> **Note:** Outlet/owner details are fictional sample content. Founder profile (Podila Balaji / Bobby) and all branch addresses are placeholders. Sample content markers are kept in code comments.
