@@ -6,10 +6,10 @@ export const dynamic = "force-dynamic";
 function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet>) {
   const text = String(prompt || "").toLowerCase();
 
-  // Parse constraints strictly
+  // Hard price limit
   const maxPriceMatch = text.match(/under\s*₹?\s*(\d+)/i) || text.match(/below\s*₹?\s*(\d+)/i) || text.match(/₹\s*(\d+)/) || text.match(/under\s+(\d+)/i);
   const explicitMax = maxPriceMatch ? Number(maxPriceMatch[1]) : null;
-  const wantsCheap = /\bcheap\b|budget|under 100/.test(text);
+  const wantsCheap = /\bcheap\b|budget/.test(text);
   const maxPrice = explicitMax ?? (wantsCheap ? 100 : 10000);
 
   const wantsCold = /\b(cold|iced|cool|thand|nimbu|sharbat|juice|shake|lassi|cooler|mocktail)\b/.test(text);
@@ -20,34 +20,42 @@ function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet
   const wantsSnack = /snack|light bite|chaat|samosa|bajji|puff|roll|pav|breakfast|tiffin/.test(text);
   const wantsMeal = /meal|thali|rice|dosa|pasta|pizza|burger|dinner|lunch|for two|family|sharing|भोजन/.test(text);
   const wantsDrink = /drink|beverage|juice|coffee|chai|tea|lassi|shake|cooler/.test(text) || (wantsCold || wantsHot);
+  const wantsLight = /light|halka|kam|चैय्या|లايت్/.test(text);
   const wantsPremium = /premium|expensive|high end|single origin|tasting flight|belgian|truffle|lobster|seafood/.test(text);
 
   const candidates = menu.filter((m) => {
     const base = m.sizes[0]?.price ?? 9999;
-    // Hard price enforcement
+
+    // Hard price filter
     if (base > maxPrice) return false;
 
-    // Hard hot/cold enforcement
+    // Premium query: must be premium or price >= 399
+    if (wantsPremium && !m.premium && base < 399) return false;
+
+    // Hard hot/cold
     if (wantsCold && m.hot === true) return false;
     if (wantsHot && m.hot === false) return false;
 
-    // Hard veg enforcement
+    // Hard veg
     if (wantsVeg && !m.veg) return false;
 
-    // Category enforcement to avoid dessert→dinner mismatch
-    if (wantsSweet && /platter|dinner set|sharing bowl|seafood platter/.test(m.category.toLowerCase()) && !/dessert|sweet|cake|chocolate|falooda/.test(`${m.name} ${m.tags.join(" ")}`.toLowerCase())) return false;
-    // Cheap should never return premium
+    // Hard category mismatches
+    if (wantsSweet && !wantsDrink && !wantsMeal) {
+      if (!/(dessert|sweet|cake|chocolate|brownie|donut|cookie|falooda|shake|ice cream|lassi|tower|jar|cheesecake|mousse)/.test(`${m.name} ${m.category} ${m.tags.join(" ")}`.toLowerCase())) return false;
+      if (/(platter|dinner set|sharing bowl|seafood platter|family)/.test(m.category.toLowerCase())) return false;
+    }
+    if (wantsSnack && m.category === "Meals & Bakery") return false;
     if (wantsCheap && m.premium) return false;
 
     return true;
   });
 
+  // Score and rank
   const scored = candidates
     .map((m) => {
       let score = m.popularity;
       const hay = `${m.name} ${m.description} ${m.category} ${m.tags.join(" ")}`.toLowerCase();
 
-      // Reward category matches
       if (wantsSweet && /(dessert|sweet|cake|chocolate|brownie|donut|cookie|falooda|shake|mousse|cheesecake|ice cream|bebinca|mishti)/.test(hay)) score += 60;
       if (wantsDrink && /(drink|cold drinks|hot drinks|juice|shake|lassi|cooler|mocktail)/.test(m.category.toLowerCase())) score += 40;
       if (wantsSnack && /(snack|street|chaat|bajji|puff|roll|pav|bhel|samosa)/.test(m.category.toLowerCase())) score += 50;
@@ -60,19 +68,22 @@ function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet
       if (wantsHot && m.hot === true) score += 25;
       if (wantsCold && /(cold|iced|lassi|shake|juice|cooler|sharbat|mocktail|soda|nimbu)/.test(hay)) score += 30;
       if (wantsHot && /(hot|chai|coffee|tea|kaapi)/.test(hay)) score += 30;
+
+      if (wantsLight && m.label === "Light") score += 35;
+      if (wantsLight && m.nutrition.calories < 150) score += 20;
+
       if (wantsCheap) score += Math.max(0, 30 - (m.sizes[0]?.price ?? 0) / 10);
       if (wantsPremium && m.premium) score += 60;
 
-      // Penalize premium in cheap queries (already filtered, but keep as safety)
-      if (wantsCheap && m.premium) score -= 100;
-
       return { m, score };
     })
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 4)
-    .map((x) => x.m);
+    .sort((a, b) => b.score - a.score);
 
-  return { candidates: scored, source: "fallback" as const };
+  // Do NOT pad to 4. Return only those above a minimal relevance threshold.
+  // If query is very generic, return top 3. If specific, return up to 4 that genuinely match.
+  const matched = scored.filter((x) => x.score > 80 || (x.score > 55 && (wantsSweet || wantsMeal || wantsSnack || wantsPremium))).slice(0, 4);
+
+  return { candidates: matched.map((x) => x.m), source: "fallback" as const };
 }
 
 export async function POST(req: Request) {
@@ -95,7 +106,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         items: fb.candidates.map((p) => p.id),
-        reason: fb.candidates[0] ? `From "${prompt}" — here are a few that fit.` : "No items matched.",
+        reason: fb.candidates.length > 0 ? `From "${prompt}" — here are a few that fit.` : "No items matched your query for this outlet. Try broader terms.",
         note: "Basic search — no AI key configured",
         source: "fallback",
       },
@@ -142,7 +153,7 @@ export async function POST(req: Request) {
       const errBody = await response.text();
       console.log("[recommend] AI HTTP error", response.status, errBody.slice(0, 200));
       const fb = fallbackRecommend(prompt, menu);
-      return NextResponse.json({ items: fb.candidates.map((p) => p.id), reason: fb.candidates[0] ? `From "${prompt}" — here are a few.` : "", note: "AI unavailable, using basic search", source: "fallback" }, { headers: { "Cache-Control": "no-store" } });
+      return NextResponse.json({ items: fb.candidates.map((p) => p.id), reason: fb.candidates.length > 0 ? `From "${prompt}" — here are a few.` : "No items matched.", note: "AI unavailable, using basic search", source: "fallback" }, { headers: { "Cache-Control": "no-store" } });
     }
 
     const data = await response.json();
@@ -154,8 +165,7 @@ export async function POST(req: Request) {
 
     const validIds = new Set(menu.map((m) => m.id));
     const maxPriceMatch = prompt.match(/under\s*₹?\s*(\d+)/i);
-    const maxPrice = maxPriceMatch ? Number(maxPriceMatch[1]) : 10000;
-    const wantsCheap = /\bcheap\b/.test(prompt.toLowerCase()) ? 100 : maxPrice;
+    const maxPrice = maxPriceMatch ? Number(maxPriceMatch[1]) : (/\bcheap\b/.test(prompt.toLowerCase()) ? 100 : 10000);
 
     const validated = [];
     for (const it of parsed.items || []) {
@@ -163,7 +173,7 @@ export async function POST(req: Request) {
       if (!validIds.has(id)) continue;
       const item = menu.find((m) => m.id === id);
       const price = item?.sizes[0]?.price ?? 0;
-      if (price > wantsCheap) continue;
+      if (price > maxPrice) continue;
       validated.push(id);
       if (validated.length >= 4) break;
     }
@@ -178,5 +188,5 @@ export async function POST(req: Request) {
 
   console.log("[recommend] source: fallback (AI failed)");
   const fb = fallbackRecommend(prompt, menu);
-  return NextResponse.json({ items: fb.candidates.map((p) => p.id), reason: fb.candidates[0] ? `From "${prompt}" — basic search fallback.` : "", note: "Basic search — AI failed", source: "fallback" }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json({ items: fb.candidates.map((p) => p.id), reason: fb.candidates.length > 0 ? `From "${prompt}" — basic search fallback.` : "No items matched.", note: "Basic search — AI failed", source: "fallback" }, { headers: { "Cache-Control": "no-store" } });
 }
