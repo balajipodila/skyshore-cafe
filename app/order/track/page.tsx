@@ -36,7 +36,7 @@ export default function TrackPage() {
   const total = order?.total || 140;
   const eta = idx >= 4 ? "Delivered" : idx === 3 ? "Arriving now" : idx === 2 ? "12 min" : idx === 1 ? "18 min" : "22 min";
 
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=918912344001&text=${encodeURIComponent(`Hello Skyshore Café! Checking my order #${orderId}`)}`;
+  // No external WhatsApp link — mock only. Customer data stays local.
 
   return (
     <div className="mx-3 sm:mx-6 max-w-3xl lg:mx-auto pb-16">
@@ -96,8 +96,8 @@ export default function TrackPage() {
           <Link href="/menu" className="rounded-full bg-navy text-white dark:bg-white dark:text-navy px-6 py-2.5 text-xs sm:text-sm font-semibold hover:bg-coral transition">
             Order More Sips & Bites
           </Link>
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm font-semibold underline hover:text-emerald-600">
-            Need help? Chat on WhatsApp →
+          <a href="tel:+918912344001" className="text-xs sm:text-sm font-semibold underline hover:text-emerald-600">
+            Need help? Call Skyshore (+91 89123 44001)
           </a>
         </div>
       </section>

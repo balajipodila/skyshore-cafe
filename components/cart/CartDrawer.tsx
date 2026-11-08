@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 import { useCart } from "@/store/cart";
-import { useToast } from "@/store/toast";
 import { Button } from "../ui/Button";
 import { formatINR } from "@/lib/data";
 
@@ -14,11 +14,23 @@ export function CartDrawer({ open: propsOpen, onClose: propsOnClose }: { open?: 
     if (propsOnClose) propsOnClose();
     setStoreOpen(false);
   };
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   const items = useCart((s) => s.items);
   const remove = useCart((s) => s.remove);
   const clear = useCart((s) => s.clear);
   const total = useCart((s) => s.total());
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    document.addEventListener("keydown", onKey);
+    // Focus the close button for screen readers / keyboard
+    setTimeout(() => closeRef.current?.focus(), 50);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -33,11 +45,11 @@ export function CartDrawer({ open: propsOpen, onClose: propsOnClose }: { open?: 
       >
         <aside
           onClick={(e) => e.stopPropagation()}
-          className="glass ml-auto h-full w-full sm:max-w-md p-5 sm:p-6 flex flex-col rounded-none sm:rounded-l-[28px] animate-slide-in-right"
+          className="glass ml-auto h-full w-full sm:max-w-md p-4 sm:p-6 flex flex-col rounded-none sm:rounded-l-[28px] animate-slide-in-right max-w-[100vw] overflow-x-hidden"
         >
           <div className="flex items-center justify-between">
             <h2 className="font-serif text-2xl font-semibold">Your basket</h2>
-            <button type="button" onClick={handleClose} className="glass rounded-full px-4 py-2 text-sm font-semibold" aria-label="Close cart">
+            <button ref={closeRef} type="button" onClick={handleClose} className="glass rounded-full px-4 py-2 text-sm font-semibold min-h-[44px]" aria-label="Close cart">
               Close
             </button>
           </div>
@@ -60,16 +72,16 @@ export function CartDrawer({ open: propsOpen, onClose: propsOnClose }: { open?: 
                     {i.image && (
                       <Image src={i.image} alt={i.name} width={64} height={64} className="size-16 rounded-xl object-cover" />
                     )}
-                    <div className="flex-1">
-                      <p className="font-semibold leading-tight">{i.name}</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold leading-tight truncate">{i.name}</p>
                       <p className="text-xs text-navy/60">
                         {i.size ? `${i.size} · ` : ""}
                         {formatINR(i.price)} × {i.qty}
                       </p>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right shrink-0">
                       <p className="font-bold">{formatINR(i.price * i.qty)}</p>
-                      <button type="button" onClick={() => remove(i.id, i.size)} className="text-xs underline mt-1" aria-label={`Remove ${i.name}`}>
+                      <button type="button" onClick={() => remove(i.id, i.size)} className="text-xs underline mt-1 min-h-[28px]" aria-label={`Remove ${i.name}`}>
                         Remove
                       </button>
                     </div>
@@ -93,7 +105,7 @@ export function CartDrawer({ open: propsOpen, onClose: propsOnClose }: { open?: 
                   <Button href="/checkout" className="flex-1">
                     Checkout
                   </Button>
-                  <button type="button" onClick={clear} className="rounded-full px-4 py-2 text-sm font-semibold border">
+                  <button type="button" onClick={clear} className="rounded-full px-4 py-2 text-sm font-semibold border min-h-[44px]">
                     Clear
                   </button>
                 </div>
