@@ -5,19 +5,21 @@ export type Nutrition = {
 export type MenuItem = {
   id: string;
   name: string;
-  category: string;
+  category: "drink" | "snack" | "meal" | "dessert" | "combo";
   description: string;
   veg: boolean;
   sizes: SizeOption[];
   image: string;
   tags: string[];
-  spice: "none" | "mild" | "medium" | "hot";
+  spice: number; // 0-3
   prepTime: number;
   popularity: number;
   nutrition: Nutrition;
   allergens: string[];
   label: "Light" | "Balanced" | "Indulgent";
   hot?: boolean;
+  temp?: "hot" | "cold" | "none";
   caffeineFree?: boolean;
   premium?: boolean;
+  isCoffee?: boolean;
 };

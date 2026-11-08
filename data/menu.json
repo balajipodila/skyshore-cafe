@@ -2,7 +2,7 @@
   {
     "id": "masala-chai",
     "name": "Masala Chai",
-    "category": "Hot Drinks",
+    "category": "drink",
     "description": "Strong, spiced, pull it along a lane in Vizag and every stall sings the same tune.",
     "veg": true,
     "sizes": [
@@ -24,7 +24,7 @@
       "classic",
       "spiced"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 6,
     "popularity": 98,
     "nutrition": {
@@ -40,12 +40,14 @@
     ],
     "label": "Balanced",
     "hot": true,
-    "caffeineFree": false
+    "caffeineFree": false,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "filter-coffee",
     "name": "Filter Coffee",
-    "category": "Hot Drinks",
+    "category": "drink",
     "description": "South ka filter coffee, decoction strong enough to wake a fish.",
     "veg": true,
     "sizes": [
@@ -67,7 +69,7 @@
       "classic",
       "strong"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 5,
     "popularity": 96,
     "nutrition": {
@@ -82,12 +84,14 @@
       "milk"
     ],
     "label": "Light",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": true
   },
   {
     "id": "ginger-tea",
     "name": "Ginger Tea",
-    "category": "Hot Drinks",
+    "category": "drink",
     "description": "Crushed ginger, tulsi and lemongrass — for throats, weather and bad mornings.",
     "veg": true,
     "sizes": [
@@ -105,7 +109,7 @@
       "classic",
       "light"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 6,
     "popularity": 84,
     "nutrition": {
@@ -119,12 +123,14 @@
     "allergens": [],
     "label": "Light",
     "hot": true,
-    "caffeineFree": false
+    "caffeineFree": false,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "irani-chai",
     "name": "Irani Chai",
-    "category": "Hot Drinks",
+    "category": "drink",
     "description": "Hyderabad style — mawa, saffron, and a glass that cools just enough.",
     "veg": true,
     "sizes": [
@@ -142,7 +148,7 @@
       "classic",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 7,
     "popularity": 90,
     "nutrition": {
@@ -157,12 +163,14 @@
       "milk"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "badam-milk",
     "name": "Badam Milk",
-    "category": "Hot Drinks",
+    "category": "drink",
     "description": "Almond milk, saffron strands, served warm in a kulhad.",
     "veg": true,
     "sizes": [
@@ -180,7 +188,7 @@
       "classic",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 8,
     "popularity": 85,
     "nutrition": {
@@ -197,12 +205,14 @@
     ],
     "label": "Indulgent",
     "hot": true,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "hot-chocolate",
     "name": "Hot Chocolate",
-    "category": "Hot Drinks",
+    "category": "drink",
     "description": "Real chocolate, not cocoa powder. Marshmallows when you ask.",
     "veg": true,
     "sizes": [
@@ -220,7 +230,7 @@
       "sweet",
       "dessert"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 9,
     "popularity": 87,
     "nutrition": {
@@ -235,12 +245,14 @@
       "milk"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "cappuccino",
     "name": "Cappuccino",
-    "category": "Hot Drinks",
+    "category": "drink",
     "description": "Espresso, steamed milk, foam that holds its shape.",
     "veg": true,
     "sizes": [
@@ -262,7 +274,7 @@
       "coffee",
       "classic"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 6,
     "popularity": 89,
     "nutrition": {
@@ -278,12 +290,14 @@
       "caffeine"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": true
   },
   {
     "id": "latte",
     "name": "Latte",
-    "category": "Hot Drinks",
+    "category": "drink",
     "description": "Mellow, milky, built for a slow morning.",
     "veg": true,
     "sizes": [
@@ -301,7 +315,7 @@
       "coffee",
       "classic"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 6,
     "popularity": 88,
     "nutrition": {
@@ -317,12 +331,14 @@
       "caffeine"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": true
   },
   {
     "id": "mocha",
     "name": "Mocha",
-    "category": "Hot Drinks",
+    "category": "drink",
     "description": "Espresso, dark chocolate, steamed milk — a proper treat.",
     "veg": true,
     "sizes": [
@@ -340,7 +356,7 @@
       "coffee",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 7,
     "popularity": 86,
     "nutrition": {
@@ -356,12 +372,14 @@
       "caffeine"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": true
   },
   {
     "id": "sunset-sky",
     "name": "Sunset Sky",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Our signature. Blue curacao, orange, pineapple, and a whisper of ginger — sky at 6:42 PM.",
     "veg": true,
     "sizes": [
@@ -383,7 +401,7 @@
       "signature",
       "mocktail"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 8,
     "popularity": 94,
     "nutrition": {
@@ -397,12 +415,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "cold-coffee",
     "name": "Cold Coffee",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Blended thick, with a scoop when you ask nicely.",
     "veg": true,
     "sizes": [
@@ -424,7 +444,7 @@
       "caffeine",
       "bestseller"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 9,
     "popularity": 95,
     "nutrition": {
@@ -440,12 +460,14 @@
       "caffeine"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": true
   },
   {
     "id": "iced-latte",
     "name": "Iced Latte",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Double shot over milk and ice, clean finish.",
     "veg": true,
     "sizes": [
@@ -463,7 +485,7 @@
       "coffee",
       "light"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 6,
     "popularity": 85,
     "nutrition": {
@@ -479,12 +501,14 @@
       "caffeine"
     ],
     "label": "Light",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": true
   },
   {
     "id": "blue-lagoon",
     "name": "Blue Lagoon Mocktail",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Blue curacao, lemonade, mint — a calm lagoon in a glass.",
     "veg": true,
     "sizes": [
@@ -502,7 +526,7 @@
       "mocktail",
       "light"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 6,
     "popularity": 87,
     "nutrition": {
@@ -516,12 +540,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "mango-lassi",
     "name": "Mango Lassi",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Alphonso churned with curd, a little elaichi, and no shortcuts.",
     "veg": true,
     "sizes": [
@@ -543,7 +569,7 @@
       "classic",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 7,
     "popularity": 92,
     "nutrition": {
@@ -558,12 +584,14 @@
       "milk"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "buttermilk",
     "name": "Buttermilk (Chaas)",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Thin, salted, with curry leaves and a thumb of ginger.",
     "veg": true,
     "sizes": [
@@ -581,7 +609,7 @@
       "classic",
       "light"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 4,
     "popularity": 83,
     "nutrition": {
@@ -597,12 +625,14 @@
     ],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "jaljeera",
     "name": "Jaljeera",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Roasted cumin, black salt, soda — tastes like a fair, in a good way.",
     "veg": true,
     "sizes": [
@@ -620,7 +650,7 @@
       "classic",
       "light"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 4,
     "popularity": 81,
     "nutrition": {
@@ -634,12 +664,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "lemon-soda",
     "name": "Lemon Soda",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Fresh lemon, soda or water, salt or sweet. Your call.",
     "veg": true,
     "sizes": [
@@ -657,7 +689,7 @@
       "classic",
       "light"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 3,
     "popularity": 82,
     "nutrition": {
@@ -671,12 +703,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "nannari-sharbat",
     "name": "Nannari Sharbat",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Sarsaparilla root, cool and earthy — a Vizag summer staple.",
     "veg": true,
     "sizes": [
@@ -694,7 +728,7 @@
       "classic",
       "light"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 4,
     "popularity": 80,
     "nutrition": {
@@ -708,12 +742,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "rose-milk",
     "name": "Rose Milk",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Rose syrup, chilled milk, a few petals on top.",
     "veg": true,
     "sizes": [
@@ -731,7 +767,7 @@
       "classic",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 5,
     "popularity": 84,
     "nutrition": {
@@ -747,12 +783,14 @@
     ],
     "label": "Indulgent",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "fresh-lime",
     "name": "Fresh Lime",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Sweet, salted or masala — pressed to order.",
     "veg": true,
     "sizes": [
@@ -770,7 +808,7 @@
       "light",
       "classic"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 3,
     "popularity": 79,
     "nutrition": {
@@ -784,12 +822,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "tender-coconut",
     "name": "Tender Coconut Cooler",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Malai, coconut water, mint. Tastes like shade.",
     "veg": true,
     "sizes": [
@@ -807,7 +847,7 @@
       "light",
       "caffeine-free"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 6,
     "popularity": 86,
     "nutrition": {
@@ -821,12 +861,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "watermelon-juice",
     "name": "Watermelon Juice",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Cold-pressed watermelon, mint, a squeeze of lime.",
     "veg": true,
     "sizes": [
@@ -844,7 +886,7 @@
       "light",
       "juice"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 5,
     "popularity": 85,
     "nutrition": {
@@ -858,12 +900,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "oreo-shake",
     "name": "Oreo Shake",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Cookies, vanilla, cream — the shake that sells itself.",
     "veg": true,
     "sizes": [
@@ -881,7 +925,7 @@
       "sweet",
       "dessert"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 8,
     "popularity": 90,
     "nutrition": {
@@ -897,12 +941,14 @@
       "gluten"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "falooda",
     "name": "Falooda",
-    "category": "Cold Drinks",
+    "category": "drink",
     "description": "Rose vermicelli, basil seeds, and a scoop that melts slowly.",
     "veg": true,
     "sizes": [
@@ -924,7 +970,7 @@
       "sweet",
       "classic"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 10,
     "popularity": 88,
     "nutrition": {
@@ -940,12 +986,14 @@
       "gluten"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "samosa",
     "name": "Samosa (2 pc)",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Flaky, potato-masala, tamarind on the side. The one the whole office orders at 4 PM.",
     "veg": true,
     "sizes": [
@@ -963,7 +1011,7 @@
       "street",
       "bestseller"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 10,
     "popularity": 97,
     "nutrition": {
@@ -978,12 +1026,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "mirchi-bajji",
     "name": "Mirchi Bajji",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Bajji chillies, spiced batter, onion on the side. Handle with respect.",
     "veg": true,
     "sizes": [
@@ -1001,7 +1051,7 @@
       "street",
       "spicy"
     ],
-    "spice": "hot",
+    "spice": 3,
     "prepTime": 10,
     "popularity": 88,
     "nutrition": {
@@ -1016,12 +1066,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "vada-pav",
     "name": "Vada Pav",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Mumbai's answer to everything. Garlic chutney, soft pav, hot vada.",
     "veg": true,
     "sizes": [
@@ -1039,7 +1091,7 @@
       "street",
       "bestseller"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 8,
     "popularity": 91,
     "nutrition": {
@@ -1054,12 +1106,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "pav-bhaji",
     "name": "Pav Bhaji",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Mumbai-style, extra butter, because life is short.",
     "veg": true,
     "sizes": [
@@ -1077,7 +1131,7 @@
       "street",
       "spicy"
     ],
-    "spice": "hot",
+    "spice": 3,
     "prepTime": 15,
     "popularity": 91,
     "nutrition": {
@@ -1093,12 +1147,14 @@
       "milk"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "bhel-puri",
     "name": "Bhel Puri",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Puffed rice, tangy chutneys, sev on top. Best eaten at the beach.",
     "veg": true,
     "sizes": [
@@ -1116,7 +1172,7 @@
       "street",
       "light"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 6,
     "popularity": 84,
     "nutrition": {
@@ -1131,12 +1187,14 @@
       "gluten"
     ],
     "label": "Light",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "masala-corn",
     "name": "Masala Corn",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Butter, chilli, lime — cup-sized.",
     "veg": true,
     "sizes": [
@@ -1154,7 +1212,7 @@
       "street",
       "light"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 7,
     "popularity": 83,
     "nutrition": {
@@ -1169,12 +1227,14 @@
       "milk"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "egg-puff",
     "name": "Egg Puff",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Flaky, soft egg, bakery-style.",
     "veg": false,
     "sizes": [
@@ -1192,7 +1252,7 @@
       "bakery",
       "classic"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 8,
     "popularity": 82,
     "nutrition": {
@@ -1208,12 +1268,14 @@
       "egg"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "veg-puff",
     "name": "Veg Puff",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Mixed veg, gentle spice, flaky layers.",
     "veg": true,
     "sizes": [
@@ -1231,7 +1293,7 @@
       "bakery",
       "classic"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 8,
     "popularity": 81,
     "nutrition": {
@@ -1246,12 +1308,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "punugulu",
     "name": "Punugulu",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Crispy rice-dal balls, coconut chutney, gunpowder.",
     "veg": true,
     "sizes": [
@@ -1269,7 +1333,7 @@
       "street",
       "classic"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 10,
     "popularity": 86,
     "nutrition": {
@@ -1284,12 +1348,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "maggi",
     "name": "Maggi (Masala / Cheese)",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Wok-tossed, street style. Cheese if you are feeling it.",
     "veg": true,
     "sizes": [
@@ -1307,7 +1373,7 @@
       "street",
       "bestseller"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 9,
     "popularity": 93,
     "nutrition": {
@@ -1323,12 +1389,14 @@
       "milk"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "french-fries",
     "name": "French Fries",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Peri peri or classic salt. Always hot.",
     "veg": true,
     "sizes": [
@@ -1346,7 +1414,7 @@
       "classic",
       "bestseller"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 8,
     "popularity": 90,
     "nutrition": {
@@ -1359,12 +1427,14 @@
     },
     "allergens": [],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "veg-sandwich",
     "name": "Veg Sandwich",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Grilled triple-decker, mint chutney.",
     "veg": true,
     "sizes": [
@@ -1382,7 +1452,7 @@
       "classic",
       "light"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 8,
     "popularity": 85,
     "nutrition": {
@@ -1397,12 +1467,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "grilled-sandwich",
     "name": "Grilled Sandwich",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Cheese and veggies, pressed crisp.",
     "veg": true,
     "sizes": [
@@ -1420,7 +1492,7 @@
       "classic",
       "cheese"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 9,
     "popularity": 84,
     "nutrition": {
@@ -1436,12 +1508,14 @@
       "milk"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "paneer-roll",
     "name": "Paneer Roll",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Kathati-style, mint chutney, soft paneer, no fuss.",
     "veg": true,
     "sizes": [
@@ -1459,7 +1533,7 @@
       "wrap",
       "street"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 12,
     "popularity": 89,
     "nutrition": {
@@ -1475,12 +1549,14 @@
       "milk"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "chicken-roll",
     "name": "Chicken Roll",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Spiced chicken, flaky paratha, pickled onion.",
     "veg": false,
     "sizes": [
@@ -1498,7 +1574,7 @@
       "wrap",
       "street"
     ],
-    "spice": "hot",
+    "spice": 3,
     "prepTime": 12,
     "popularity": 87,
     "nutrition": {
@@ -1513,12 +1589,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "chicken-popcorn",
     "name": "Chicken Popcorn",
-    "category": "Snacks",
+    "category": "snack",
     "description": "Bite-sized, peppery, with a dip.",
     "veg": false,
     "sizes": [
@@ -1536,7 +1614,7 @@
       "street",
       "spicy"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 12,
     "popularity": 86,
     "nutrition": {
@@ -1551,12 +1629,14 @@
       "gluten"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "veg-fried-rice",
     "name": "Veg Fried Rice",
-    "category": "Meals & Bakery",
+    "category": "meal",
     "description": "Wok hei, spring onion, wok vegetables.",
     "veg": true,
     "sizes": [
@@ -1574,7 +1654,7 @@
       "classic",
       "meal"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 14,
     "popularity": 85,
     "nutrition": {
@@ -1589,12 +1669,14 @@
       "egg"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "egg-fried-rice",
     "name": "Egg Fried Rice",
-    "category": "Meals & Bakery",
+    "category": "meal",
     "description": "Smoky wok, egg ribbons, cracked pepper.",
     "veg": false,
     "sizes": [
@@ -1612,7 +1694,7 @@
       "classic",
       "meal"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 14,
     "popularity": 86,
     "nutrition": {
@@ -1627,12 +1709,14 @@
       "egg"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "mini-veg-thali",
     "name": "Mini Veg Thali",
-    "category": "Meals & Bakery",
+    "category": "meal",
     "description": "Rice, 2 curries, dal, roti, sweet — a small, complete meal.",
     "veg": true,
     "sizes": [
@@ -1650,7 +1734,7 @@
       "meal",
       "classic"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 16,
     "popularity": 88,
     "nutrition": {
@@ -1666,12 +1750,14 @@
       "milk"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "veg-burger",
     "name": "Veg Burger",
-    "category": "Meals & Bakery",
+    "category": "meal",
     "description": "Crunchy patty, house sauce, toasted bun.",
     "veg": true,
     "sizes": [
@@ -1689,7 +1775,7 @@
       "classic",
       "meal"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 10,
     "popularity": 86,
     "nutrition": {
@@ -1704,12 +1790,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "chicken-burger",
     "name": "Chicken Burger",
-    "category": "Meals & Bakery",
+    "category": "meal",
     "description": "Grilled chicken, slaw, chipotle mayo.",
     "veg": false,
     "sizes": [
@@ -1727,7 +1815,7 @@
       "classic",
       "meal"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 11,
     "popularity": 87,
     "nutrition": {
@@ -1743,12 +1831,14 @@
       "egg"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "pasta",
     "name": "Pasta (White / Red)",
-    "category": "Meals & Bakery",
+    "category": "meal",
     "description": "Creamy alfredo or spicy arrabbiata, plenty of parmesan.",
     "veg": true,
     "sizes": [
@@ -1766,7 +1856,7 @@
       "meal",
       "classic"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 16,
     "popularity": 88,
     "nutrition": {
@@ -1782,12 +1872,14 @@
       "milk"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "pizza-slice",
     "name": "Pizza Slice",
-    "category": "Meals & Bakery",
+    "category": "meal",
     "description": "Hand-tossed base, mozzarella, chilli oil.",
     "veg": true,
     "sizes": [
@@ -1805,7 +1897,7 @@
       "classic",
       "meal"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 12,
     "popularity": 89,
     "nutrition": {
@@ -1821,12 +1913,14 @@
       "milk"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "brownie",
     "name": "Brownie",
-    "category": "Meals & Bakery",
+    "category": "dessert",
     "description": "Fudgy centre, walnut edges.",
     "veg": true,
     "sizes": [
@@ -1844,7 +1938,7 @@
       "dessert",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 8,
     "popularity": 87,
     "nutrition": {
@@ -1862,12 +1956,14 @@
       "nuts"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "choco-lava",
     "name": "Choco Lava Cake",
-    "category": "Meals & Bakery",
+    "category": "dessert",
     "description": "Warm, oozing at the centre. Best with a cold coffee.",
     "veg": true,
     "sizes": [
@@ -1885,7 +1981,7 @@
       "dessert",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 12,
     "popularity": 93,
     "nutrition": {
@@ -1902,12 +1998,14 @@
       "egg"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "donut",
     "name": "Donut",
-    "category": "Meals & Bakery",
+    "category": "dessert",
     "description": "Glazed, chocolate or caramel — fresh daily.",
     "veg": true,
     "sizes": [
@@ -1925,7 +2023,7 @@
       "dessert",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 6,
     "popularity": 85,
     "nutrition": {
@@ -1942,12 +2040,14 @@
       "egg"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "cookies",
     "name": "Cookies",
-    "category": "Meals & Bakery",
+    "category": "dessert",
     "description": "Choco-chip, butter, soft centre.",
     "veg": true,
     "sizes": [
@@ -1966,7 +2066,7 @@
       "sweet",
       "bakery"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 5,
     "popularity": 84,
     "nutrition": {
@@ -1983,12 +2083,14 @@
       "egg"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "banana-bread",
     "name": "Banana Bread",
-    "category": "Meals & Bakery",
+    "category": "dessert",
     "description": "Toasted, with cinnamon butter.",
     "veg": true,
     "sizes": [
@@ -2006,7 +2108,7 @@
       "bakery",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 5,
     "popularity": 83,
     "nutrition": {
@@ -2023,12 +2125,14 @@
       "nuts"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "cheesecake-slice",
     "name": "Cheesecake Slice",
-    "category": "Meals & Bakery",
+    "category": "dessert",
     "description": "Baked, blueberry or classic vanilla.",
     "veg": true,
     "sizes": [
@@ -2046,7 +2150,7 @@
       "dessert",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 6,
     "popularity": 88,
     "nutrition": {
@@ -2063,12 +2167,14 @@
       "gluten"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "ice-cream",
     "name": "Ice Cream Scoops",
-    "category": "Meals & Bakery",
+    "category": "dessert",
     "description": "Vanilla, mango, coconut — 2 scoops, waffle cone.",
     "veg": true,
     "sizes": [
@@ -2086,7 +2192,7 @@
       "dessert",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 4,
     "popularity": 90,
     "nutrition": {
@@ -2101,12 +2207,14 @@
       "milk"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "skyline-platter",
     "name": "Skyline Platter",
-    "category": "Signature",
+    "category": "meal",
     "description": "Small plates from across the coast — fried rice, paneer roll, a cold drink of your choice.",
     "veg": true,
     "sizes": [
@@ -2124,7 +2232,7 @@
       "signature",
       "sharing"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 25,
     "popularity": 90,
     "nutrition": {
@@ -2141,12 +2249,14 @@
       "egg"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "coffee-tasting-flight",
     "name": "Coffee Tasting Flight",
-    "category": "Signature",
+    "category": "drink",
     "description": "Three single-origin pours — light, medium, dark roast.",
     "veg": true,
     "sizes": [
@@ -2160,7 +2270,7 @@
       "signature",
       "coffee"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 12,
     "popularity": 88,
     "nutrition": {
@@ -2175,12 +2285,14 @@
       "caffeine"
     ],
     "label": "Light",
-    "hot": true
+    "hot": true,
+    "temp": "hot",
+    "isCoffee": true
   },
   {
     "id": "premium-dessert-jar",
     "name": "Premium Dessert Jar",
-    "category": "Signature",
+    "category": "dessert",
     "description": "Layers of chocolate mousse, biscuit crumb and salted caramel.",
     "veg": true,
     "sizes": [
@@ -2199,7 +2311,7 @@
       "dessert",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 10,
     "popularity": 89,
     "nutrition": {
@@ -2216,12 +2328,13 @@
       "gluten"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "guntur-mirchi-bajji",
     "name": "Guntur Mirchi Bajji",
-    "category": "Snacks",
     "description": "Extra-hot Guntur chillies, thick spiced batter, onions.",
     "veg": true,
     "sizes": [
@@ -2240,7 +2353,7 @@
       "spicy",
       "local"
     ],
-    "spice": "hot",
+    "spice": 3,
     "prepTime": 10,
     "popularity": 86,
     "nutrition": {
@@ -2255,12 +2368,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "snack",
+    "temp": "hot"
   },
   {
     "id": "gongura-chicken-roll",
     "name": "Gongura Chicken Roll",
-    "category": "Snacks",
     "description": "Tangy gongura chicken wrapped in a soft paratha.",
     "veg": false,
     "sizes": [
@@ -2279,7 +2394,7 @@
       "spicy",
       "local"
     ],
-    "spice": "hot",
+    "spice": 3,
     "prepTime": 13,
     "popularity": 85,
     "nutrition": {
@@ -2294,12 +2409,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "snack",
+    "temp": "hot"
   },
   {
     "id": "gongura-mutton-curry",
     "name": "Gongura Mutton Curry",
-    "category": "Meals & Bakery",
     "description": "Slow-cooked mutton in sour gongura leaves, served with rice.",
     "veg": false,
     "sizes": [
@@ -2318,7 +2435,7 @@
       "spicy",
       "local"
     ],
-    "spice": "hot",
+    "spice": 3,
     "prepTime": 35,
     "popularity": 84,
     "nutrition": {
@@ -2331,12 +2448,14 @@
     },
     "allergens": [],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "meal",
+    "temp": "hot"
   },
   {
     "id": "irani-chai-osmania",
     "name": "Irani Chai + Osmania Biscuit",
-    "category": "Hot Drinks",
     "description": "Classic Irani chai with a buttery Osmania biscuit on the side.",
     "veg": true,
     "sizes": [
@@ -2355,7 +2474,7 @@
       "local",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 7,
     "popularity": 90,
     "nutrition": {
@@ -2371,12 +2490,14 @@
       "gluten"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "drink",
+    "temp": "hot"
   },
   {
     "id": "hyderabadi-haleem-cup",
     "name": "Hyderabadi Haleem Cup",
-    "category": "Meals & Bakery",
     "description": "Slow-cooked wheat, mutton and dal — comfort in a cup.",
     "veg": false,
     "sizes": [
@@ -2395,7 +2516,7 @@
       "local",
       "classic"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 20,
     "popularity": 87,
     "nutrition": {
@@ -2410,12 +2531,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "meal",
+    "temp": "hot"
   },
   {
     "id": "filter-kaapi",
     "name": "Filter Kaapi",
-    "category": "Hot Drinks",
     "description": "Peaberry decoction, frothed in the classic davara-tumbler.",
     "veg": true,
     "sizes": [
@@ -2434,7 +2557,7 @@
       "local",
       "strong"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 5,
     "popularity": 93,
     "nutrition": {
@@ -2449,12 +2572,14 @@
       "milk"
     ],
     "label": "Light",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "drink",
+    "temp": "hot"
   },
   {
     "id": "sundal",
     "name": "Sundal",
-    "category": "Snacks",
     "description": "Warm chickpeas, coconut, mustard — a Chennai evening staple.",
     "veg": true,
     "sizes": [
@@ -2473,7 +2598,7 @@
       "light",
       "local"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 6,
     "popularity": 84,
     "nutrition": {
@@ -2487,12 +2612,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "isCoffee": false,
+    "category": "snack",
+    "temp": "cold"
   },
   {
     "id": "pazham-pori",
     "name": "Banana Fritters (Pazham Pori)",
-    "category": "Snacks",
     "description": "Nendran bananas, golden batter, best with nadan chai.",
     "veg": true,
     "sizes": [
@@ -2511,7 +2638,7 @@
       "sweet",
       "local"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 9,
     "popularity": 88,
     "nutrition": {
@@ -2526,12 +2653,14 @@
       "gluten"
     ],
     "label": "Indulgent",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "snack",
+    "temp": "hot"
   },
   {
     "id": "nadan-chai",
     "name": "Nadan Chai",
-    "category": "Hot Drinks",
     "description": "Kerala-style spiced tea, strong and malty.",
     "veg": true,
     "sizes": [
@@ -2550,7 +2679,7 @@
       "local",
       "spiced"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 6,
     "popularity": 89,
     "nutrition": {
@@ -2565,12 +2694,14 @@
       "milk"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "drink",
+    "temp": "hot"
   },
   {
     "id": "bebinca",
     "name": "Bebinca",
-    "category": "Meals & Bakery",
     "description": "Seven-layered Goan coconut pudding, served warm.",
     "veg": true,
     "sizes": [
@@ -2589,7 +2720,7 @@
       "sweet",
       "local"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 8,
     "popularity": 87,
     "nutrition": {
@@ -2605,12 +2736,14 @@
       "milk"
     ],
     "label": "Indulgent",
-    "hot": false
+    "hot": false,
+    "isCoffee": false,
+    "category": "dessert",
+    "temp": "cold"
   },
   {
     "id": "sea-breeze-cooler",
     "name": "Sea-Breeze Cooler",
-    "category": "Cold Drinks",
     "description": "Lime, mint, soda and a pinch of chaat masala — Goan beach cooler.",
     "veg": true,
     "sizes": [
@@ -2629,7 +2762,7 @@
       "local",
       "mocktail"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 5,
     "popularity": 85,
     "nutrition": {
@@ -2643,12 +2776,14 @@
     "allergens": [],
     "label": "Light",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "isCoffee": false,
+    "category": "drink",
+    "temp": "cold"
   },
   {
     "id": "cutting-chai",
     "name": "Cutting Chai",
-    "category": "Hot Drinks",
     "description": "Half-glass, double punch — the Mumbai way.",
     "veg": true,
     "sizes": [
@@ -2667,7 +2802,7 @@
       "local",
       "strong"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 5,
     "popularity": 92,
     "nutrition": {
@@ -2682,12 +2817,14 @@
       "milk"
     ],
     "label": "Light",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "drink",
+    "temp": "hot"
   },
   {
     "id": "kathi-roll",
     "name": "Kathi Roll",
-    "category": "Snacks",
     "description": "Flaky paratha, egg, spiced chicken — Kolkata original.",
     "veg": false,
     "sizes": [
@@ -2706,7 +2843,7 @@
       "street",
       "local"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 11,
     "popularity": 90,
     "nutrition": {
@@ -2723,12 +2860,14 @@
     ],
     "label": "Balanced",
     "hot": true,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "isCoffee": false,
+    "category": "snack",
+    "temp": "hot"
   },
   {
     "id": "mishti-doi",
     "name": "Mishti Doi",
-    "category": "Cold Drinks",
     "description": "Caramelised curd, clay-pot set, gently sweet.",
     "veg": true,
     "sizes": [
@@ -2747,7 +2886,7 @@
       "sweet",
       "local"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 4,
     "popularity": 86,
     "nutrition": {
@@ -2763,12 +2902,14 @@
     ],
     "label": "Indulgent",
     "hot": false,
-    "caffeineFree": true
+    "caffeineFree": true,
+    "isCoffee": false,
+    "category": "dessert",
+    "temp": "cold"
   },
   {
     "id": "chole-kulche",
     "name": "Chole Kulche",
-    "category": "Meals & Bakery",
     "description": "Amritsari chole with puffy kulche — Delhi comfort.",
     "veg": true,
     "sizes": [
@@ -2787,7 +2928,7 @@
       "classic",
       "local"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 15,
     "popularity": 88,
     "nutrition": {
@@ -2802,12 +2943,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "meal",
+    "temp": "hot"
   },
   {
     "id": "misal-pav",
     "name": "Misal Pav",
-    "category": "Meals & Bakery",
     "description": "Sp sprouted moth, farsan, pav — Pune's fiery breakfast.",
     "veg": true,
     "sizes": [
@@ -2826,7 +2969,7 @@
       "spicy",
       "local"
     ],
-    "spice": "hot",
+    "spice": 3,
     "prepTime": 14,
     "popularity": 89,
     "nutrition": {
@@ -2841,12 +2984,14 @@
       "gluten"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "meal",
+    "temp": "hot"
   },
   {
     "id": "benne-dosa",
     "name": "Benne Dosa",
-    "category": "Meals & Bakery",
     "description": "Butter-soft dosa, chutney and sambar, Davanagere style.",
     "veg": true,
     "sizes": [
@@ -2865,7 +3010,7 @@
       "classic",
       "local"
     ],
-    "spice": "mild",
+    "spice": 1,
     "prepTime": 12,
     "popularity": 90,
     "nutrition": {
@@ -2880,12 +3025,15 @@
       "milk"
     ],
     "label": "Balanced",
-    "hot": true
+    "hot": true,
+    "isCoffee": false,
+    "category": "meal",
+    "temp": "hot"
   },
   {
     "id": "skyline-seafood-platter",
     "name": "Skyline Seafood Platter",
-    "category": "Signature",
+    "category": "meal",
     "description": "Grilled fish, prawn skewers, butter garlic rice — the coast on a plate.",
     "veg": false,
     "sizes": [
@@ -2904,7 +3052,7 @@
       "seafood",
       "sharing"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 30,
     "popularity": 92,
     "nutrition": {
@@ -2922,12 +3070,14 @@
     ],
     "label": "Balanced",
     "hot": true,
-    "premium": true
+    "premium": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "truffle-mushroom-pasta",
     "name": "Truffle Mushroom Pasta",
-    "category": "Signature",
+    "category": "meal",
     "description": "Wild mushrooms, truffle oil, parmesan — quiet luxury.",
     "veg": true,
     "sizes": [
@@ -2945,7 +3095,7 @@
       "signature",
       "pasta"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 22,
     "popularity": 90,
     "nutrition": {
@@ -2962,12 +3112,14 @@
     ],
     "label": "Indulgent",
     "hot": true,
-    "premium": true
+    "premium": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "smoked-chicken-club",
     "name": "Smoked Chicken Club",
-    "category": "Signature",
+    "category": "meal",
     "description": "Smoked chicken, triple-decker, herb aioli, fries.",
     "veg": false,
     "sizes": [
@@ -2985,7 +3137,7 @@
       "signature",
       "classic"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 18,
     "popularity": 88,
     "nutrition": {
@@ -3002,12 +3154,14 @@
     ],
     "label": "Balanced",
     "hot": true,
-    "premium": true
+    "premium": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "lobster-fusion-bowl",
     "name": "Lobster-Style Fusion Bowl",
-    "category": "Signature",
+    "category": "meal",
     "description": "Butter-poached prawn, coconut-lime broth, jasmine rice — lobster-style, coast soul.",
     "veg": false,
     "sizes": [
@@ -3025,7 +3179,7 @@
       "signature",
       "seafood"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 28,
     "popularity": 91,
     "nutrition": {
@@ -3042,12 +3196,14 @@
     ],
     "label": "Balanced",
     "hot": true,
-    "premium": true
+    "premium": true,
+    "temp": "hot",
+    "isCoffee": false
   },
   {
     "id": "belgian-chocolate-tower",
     "name": "Belgian Chocolate Tower",
-    "category": "Signature",
+    "category": "dessert",
     "description": "Three layers — dark, milk, salted caramel — with gold-dusted chocolate.",
     "veg": true,
     "sizes": [
@@ -3066,7 +3222,7 @@
       "dessert",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 15,
     "popularity": 93,
     "nutrition": {
@@ -3085,12 +3241,14 @@
     ],
     "label": "Indulgent",
     "hot": false,
-    "premium": true
+    "premium": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "saffron-pistachio-cheesecake",
     "name": "Saffron Pistachio Cheesecake",
-    "category": "Signature",
+    "category": "dessert",
     "description": "Kesar cream, pistachio praline, rose water notes.",
     "veg": true,
     "sizes": [
@@ -3109,7 +3267,7 @@
       "dessert",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 10,
     "popularity": 90,
     "nutrition": {
@@ -3127,12 +3285,14 @@
     ],
     "label": "Indulgent",
     "hot": false,
-    "premium": true
+    "premium": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "single-origin-coffee-flight",
     "name": "Single-Origin Coffee Tasting Flight",
-    "category": "Signature",
+    "category": "drink",
     "description": "Chikmagalur, Coorg, Araku — three origins, one flight.",
     "veg": true,
     "sizes": [
@@ -3150,7 +3310,7 @@
       "signature",
       "coffee"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 14,
     "popularity": 89,
     "nutrition": {
@@ -3167,12 +3327,14 @@
     ],
     "label": "Light",
     "hot": true,
-    "premium": true
+    "premium": true,
+    "temp": "hot",
+    "isCoffee": true
   },
   {
     "id": "sunset-sky-pitcher",
     "name": "Sunset Sky Mocktail Pitcher",
-    "category": "Signature",
+    "category": "drink",
     "description": "Our signature, by the pitcher — serves 4, still layered.",
     "veg": true,
     "sizes": [
@@ -3191,7 +3353,7 @@
       "mocktail",
       "sharing"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 10,
     "popularity": 91,
     "nutrition": {
@@ -3206,12 +3368,14 @@
     "label": "Light",
     "hot": false,
     "caffeineFree": true,
-    "premium": true
+    "premium": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "premium-dessert-jar-premium",
     "name": "Premium Dessert Jar (Signature)",
-    "category": "Signature",
+    "category": "dessert",
     "description": "Belgian mousse, pistachio, gold leaf — the jar, elevated.",
     "veg": true,
     "sizes": [
@@ -3230,7 +3394,7 @@
       "dessert",
       "sweet"
     ],
-    "spice": "none",
+    "spice": 0,
     "prepTime": 10,
     "popularity": 90,
     "nutrition": {
@@ -3249,12 +3413,14 @@
     ],
     "label": "Indulgent",
     "hot": false,
-    "premium": true
+    "premium": true,
+    "temp": "cold",
+    "isCoffee": false
   },
   {
     "id": "couples-sunset-set",
     "name": "Couple's Sunset Dinner Set",
-    "category": "Signature",
+    "category": "meal",
     "description": "Two small plates, two Sunset Skies, one dessert jar — timed to the sunset.",
     "veg": true,
     "sizes": [
@@ -3269,7 +3435,7 @@
       "sharing",
       "for two"
     ],
-    "spice": "medium",
+    "spice": 2,
     "prepTime": 30,
     "popularity": 92,
     "nutrition": {
@@ -3287,6 +3453,8 @@
     ],
     "label": "Balanced",
     "hot": true,
-    "premium": true
+    "premium": true,
+    "temp": "hot",
+    "isCoffee": false
   }
 ]

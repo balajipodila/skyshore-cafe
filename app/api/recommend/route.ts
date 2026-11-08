@@ -17,11 +17,13 @@ function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet
   const wantsVeg = /\b(veg|vegetarian|shakahari|veg only|తృణ|విజి|शाकाहारी)\b/.test(text);
   const wantsSpicy = /spicy|spice|mirchi|masala|hot|కారం|तीखा/.test(text);
   const wantsSweet = /sweet|dessert|mitha|meeta|cake|ice cream|falooda|shake|chocolate|brownie|donut|cookie|తీపి|मीठा/.test(text);
+  const wantsDessertStrict = /dessert|sweet/.test(text);
   const wantsSnack = /snack|light bite|chaat|samosa|bajji|puff|roll|pav|breakfast|tiffin/.test(text);
   const wantsMeal = /meal|thali|rice|dosa|pasta|pizza|burger|dinner|lunch|for two|family|sharing|भोजन/.test(text);
   const wantsDrink = /drink|beverage|juice|coffee|chai|tea|lassi|shake|cooler/.test(text) || (wantsCold || wantsHot);
   const wantsLight = /light|halka|kam|चैय्या|లايت్/.test(text);
   const wantsPremium = /premium|expensive|high end|single origin|tasting flight|belgian|truffle|lobster|seafood/.test(text);
+  const wantsCoffee = /coffee|caf/i.test(text);
 
   const candidates = menu.filter((m) => {
     const base = m.sizes[0]?.price ?? 9999;
@@ -33,18 +35,24 @@ function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet
     if (wantsPremium && !m.premium && base < 399) return false;
 
     // Hard hot/cold
-    if (wantsCold && m.hot === true) return false;
-    if (wantsHot && m.hot === false) return false;
+    if (wantsCold && m.temp !== "cold") return false;
+    if (wantsHot && m.temp !== "hot") return false;
 
     // Hard veg
     if (wantsVeg && !m.veg) return false;
 
     // Hard category mismatches
-    if (wantsSweet && !wantsDrink && !wantsMeal) {
-      if (!/(dessert|sweet|cake|chocolate|brownie|donut|cookie|falooda|shake|ice cream|lassi|tower|jar|cheesecake|mousse)/.test(`${m.name} ${m.category} ${m.tags.join(" ")}`.toLowerCase())) return false;
-      if (/(platter|dinner set|sharing bowl|seafood platter|family)/.test(m.category.toLowerCase())) return false;
+    if (wantsSweet || wantsDessertStrict) {
+      if (wantsSweet && m.category !== "dessert") return false;
     }
-    if (wantsSnack && m.category === "Meals & Bakery") return false;
+    if (wantsSnack && m.category !== "snack") return false;
+    if (wantsMeal && m.category !== "meal") return false;
+    if (wantsCoffee && !(m as any).isCoffee) return false;
+
+    // Spicy & light hard filters
+    if (wantsSpicy && m.spice < 2) return false;
+    if (wantsLight && m.nutrition.calories > 200) return false;
+
     if (wantsCheap && m.premium) return false;
 
     return true;
@@ -61,8 +69,8 @@ function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet
       if (wantsSnack && /(snack|street|chaat|bajji|puff|roll|pav|bhel|samosa)/.test(m.category.toLowerCase())) score += 50;
       if (wantsMeal && /(meal|thali|fried rice|dosa|pasta|pizza|burger|platter|bowl)/.test(m.category.toLowerCase())) score += 50;
 
-      if (wantsSpicy && (m.spice === "hot" || m.spice === "medium")) score += 40;
-      if (wantsSpicy && m.spice === "hot") score += 20;
+      if (wantsSpicy && (m.spice >= 2)) score += 40;
+      if (wantsSpicy && m.spice >= 3) score += 20;
 
       if (wantsCold && m.hot === false) score += 25;
       if (wantsHot && m.hot === true) score += 25;

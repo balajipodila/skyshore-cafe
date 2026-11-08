@@ -6,7 +6,6 @@ export type Combo = (typeof combos)[number];
 
 export function outletDateString(now = new Date(), override?: string): string {
   if (override) {
-    // Allow YYYY-MM-DD override for dev testing via ?date=YYYY-MM-DD
     const match = override.match(/^\d{4}-\d{2}-\d{2}/);
     if (match) return match[0];
   }
@@ -72,7 +71,9 @@ const CHEF_NOTES: Record<string, string> = {
 export function chefsSpecial(outletId: string, dateOverride?: string): { item: MenuItem; note: string } | null {
   const date = outletDateString(new Date(), dateOverride ?? getDateOverride());
   const menu = menuForOutlet(outletId);
-  const rotated = rotate(menu, `${date}:${outletId}:chef`);
+  // Only meals or desserts or premium/signature — never plain drinks
+  const eligible = menu.filter((m) => m.category === "meal" || m.category === "dessert" || m.premium);
+  const rotated = rotate(eligible.length ? eligible : menu, `${date}:${outletId}:chef`);
   const pick = rotated[0];
   return { item: pick, note: CHEF_NOTES[pick.id] ?? "Picked because it tastes like the sea at its best — fresh, warm and honest." };
 }
