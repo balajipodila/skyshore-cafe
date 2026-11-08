@@ -7,16 +7,16 @@ function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet
   const text = String(prompt || "").toLowerCase();
   const maxPriceMatch = text.match(/under\s*₹?\s*(\d+)/i) || text.match(/below\s*₹?\s*(\d+)/i) || text.match(/₹\s*(\d+)/);
   const maxPrice = maxPriceMatch ? Number(maxPriceMatch[1]) : 10000;
-  const wantsCold = /\b(cold|iced|cool|nimbu|sharbat|juice|shake|lassi|cooler|mocktail)\b/.test(text);
-  const wantsHot = /\b(hot|chai|coffee|tea|kaapi)\b/.test(text);
-  const wantsVeg = /\b(veg|vegetarian|shाकाहारी|veg only)\b/.test(text);
-  const wantsSpicy = /spicy|spice|mirchi|masala|hot/.test(text);
-  const wantsSweet = /sweet|dessert|mitha|meeta|cake|ice cream|falooda|shake|chocolate|brownie|donut|cookie/.test(text);
-  const wantsSnack = /snack|light bite|chaat|samosa|bajji|puff|roll|pav|breakfast|tiffin/.test(text);
-  const wantsMeal = /meal|thali|rice|dosa|pasta|pizza|burger|dinner|lunch|for two|family|sharing/.test(text);
+  const wantsCold = /\b(cold|iced|cool|thand|nimbu|sharbat|juice|shake|lassi|cooler|mocktail)\b/.test(text) || /thand|冷/.test(text);
+  const wantsHot = /\b(hot|chai|coffee|tea|kaapi|kapi|गरम| వేడి)/.test(text);
+  const wantsVeg = /\b(veg|vegetarian|shakahari|shakahari|veg only|తృణ|విజి|शाकाहारी)\b/.test(text);
+  const wantsSpicy = /spicy|spice|mirchi|masala|hot|కారం|तीखा|तीखे/.test(text);
+  const wantsSweet = /sweet|dessert|mitha|meeta|cake|ice cream|falooda|shake|chocolate|brownie|donut|cookie|తీపి|मीठा|मिठाई/.test(text);
+  const wantsSnack = /snack|light bite|chaat|samosa|bajji|puff|roll|pav|breakfast|tiffin|చీరో|स्नैक/.test(text);
+  const wantsMeal = /meal|thali|rice|dosa|pasta|pizza|burger|dinner|lunch|for two|family|sharing|भोजन|भात/.test(text);
   const wantsCheap = /cheap|budget|under|less|₹\d/i.test(text);
 
-  let candidates = menu.filter((m) => {
+  const candidates = menu.filter((m) => {
     const base = m.sizes[0]?.price ?? 9999;
     if (base > maxPrice) return false;
     if (wantsCold && m.hot === true) return false;
@@ -27,7 +27,7 @@ function fallbackRecommend(prompt: string, menu: ReturnType<typeof menuForOutlet
 
   const scored = candidates
     .map((m) => {
-      let score = m.popularity; // base
+      let score = m.popularity;
       const hay = `${m.name} ${m.description} ${m.category} ${m.tags.join(" ")}`.toLowerCase();
       const keywordHits = (re: RegExp) => (re.test(hay) ? 60 : 0);
       if (wantsSpicy && (m.spice === "hot" || m.spice === "medium")) score += keywordHits(/spicy|mirchi|masala|street|snack|bajji|pav|roll|misal|gongura/);
@@ -52,24 +52,9 @@ export async function POST(req: Request) {
   const prompt: string = body.prompt ?? body.query ?? "";
   const outletId: string = body.outletId ?? "vizag-beach-road";
   const menu = menuForOutlet(outletId);
-  console.log("[recommend] query:", JSON.stringify(prompt), "outletId:", outletId, "menuSize:", menu.length);
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  console.log("[recommend]", JSON.stringify({ query: prompt, outletId, menuSize: menu.length }));
 
-  if (!apiKey || !apiKey.trim() || apiKey === "your_key_here") {
-    const fb = fallbackRecommend(prompt, menu);
-    console.log("[recommend] fallback path (no API key)");
-    return NextResponse.json(
-      {
-        items: fb.candidates.map((p) => p.id),
-        reason: `From "${prompt}" — here are a few that fit your mood and budget.`,
-        source: "fallback",
-      },
-      { headers: { "Cache-Control": "no-store" } }
-    );
-  }
-
-  // Compact menu only: id, name, price, veg, tags
   const compact = menu.map((m) => ({
     id: m.id,
     name: m.name,
@@ -78,74 +63,103 @@ export async function POST(req: Request) {
     tags: m.tags,
   }));
 
-  let response: Response;
-  try {
-    response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-3-5-sonnet-latest",
-        max_tokens: 400,
-        temperature: 0.3,
-        messages: [
-          {
-            role: "user",
-            content: `You are the Skyshore Café menu recommender. User said (English/Telugu/Hindi/Tenglish okay): "${prompt}"
+  // OpenAI-compatible path
+  const aiBaseUrl = process.env.AI_BASE_URL;
+  const aiApiKey = process.env.AI_API_KEY;
+  const aiModel = process.env.AI_MODEL;
+
+  if (aiBaseUrl && aiApiKey && aiModel) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      const response = await fetch(`${aiBaseUrl}/chat/completions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${aiApiKey}`,
+        },
+        body: JSON.stringify({
+          model: aiModel,
+          temperature: 0.3,
+          max_tokens: 400,
+          messages: [
+            {
+              role: "system",
+              content: `You are the Skyshore Café menu recommender. User might speak English, Telugu (తెలుగు), Hindi (हिन्दी), or Tenglish (mix). Always respond with valid JSON only.`,
+            },
+            {
+              role: "user",
+              content: `User said: "${prompt}"
 
 Menu (JSON array of {id, name, price, veg, tags}):
 ${JSON.stringify(compact)}
 
-Return ONLY valid JSON with this shape:
-{"items": ["id1", "id2"], "reason": "one short friendly sentence"}
+Return ONLY valid JSON with this exact shape:
+{"items": [{"id": "id1", "reason": "short reason"}, {"id": "id2", "reason": "short reason"}], "note": "1 sentence summary"}
 
-Pick 2-4 item ids that exist exactly as shown. The reason should be warm and specific.`,
-          },
-        ],
-      }),
-    });
-  } catch (err) {
-    console.log("[recommend] AI call threw, fallback:", String(err));
-    const fb = fallbackRecommend(prompt, menu);
-    return NextResponse.json(
-      { items: fb.candidates.map((p) => p.id), reason: `From "${prompt}" — here are a few that fit.`, source: "fallback" },
-      { headers: { "Cache-Control": "no-store" } }
-    );
+Pick at most 4 item ids that exist exactly as shown.`,
+            },
+          ],
+        }),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeout);
+
+      if (response.ok) {
+        const data = await response.json();
+        const rawContent = data.choices?.[0]?.message?.content ?? "";
+        console.log("[recommend] raw model response:", rawContent);
+
+        const jsonText = rawContent.replace(/```json\n?/g, "").replace(/```/g, "").trim();
+
+        const parsed = JSON.parse(jsonText);
+
+        const validIds = new Set(menu.map((m) => m.id));
+        const maxPriceMatch = prompt.match(/under\s*₹?\s*(\d+)/i);
+        const maxPrice = maxPriceMatch ? Number(maxPriceMatch[1]) : 10000;
+
+        const validatedItems: Array<{ id: string; reason: string }> = [];
+        for (const it of parsed.items || []) {
+          const id = typeof it === "string" ? it : it.id;
+          const reason = typeof it === "object" && it.reason ? it.reason : "Fits your mood";
+          if (!validIds.has(id)) continue;
+          const item = menu.find((m) => m.id === id);
+          const price = item?.sizes[0]?.price ?? 0;
+          if (price > maxPrice) continue;
+          validatedItems.push({ id, reason });
+          if (validatedItems.length >= 4) break;
+        }
+
+        if (validatedItems.length > 0) {
+          return NextResponse.json(
+            {
+              items: validatedItems.map((x) => x.id),
+              reasons: validatedItems.map((x) => x.reason),
+              reason: parsed.note || validatedItems[0].reason,
+              note: parsed.note || "Here are a few that fit your mood.",
+              source: "ai",
+            },
+            { headers: { "Cache-Control": "no-store" } }
+          );
+        }
+      }
+    } catch (err) {
+      console.log("[recommend] AI call failed, using fallback:", String(err));
+    }
   }
 
-  console.log("[recommend] AI status:", response.status);
-
-  if (!response.ok) {
-    console.log("[recommend] AI non-ok, fallback");
-    const fb = fallbackRecommend(prompt, menu);
-    return NextResponse.json(
-      { items: fb.candidates.map((p) => p.id), reason: `From "${prompt}" — here are a few that fit.`, source: "fallback" },
-      { headers: { "Cache-Control": "no-store" } }
-    );
-  }
-
-  const data = (await response.json()) as { content?: Array<{ text?: string }> };
-  const raw = data.content?.[0]?.text ?? "";
-  console.log("[recommend] raw model response:", raw);
-  const jsonText = raw.replace(/```json\n?|```\n?/g, "").trim();
-  try {
-    const parsed = JSON.parse(jsonText);
-    const validIds = new Set(menu.map((m) => m.id));
-    const items = (parsed.items || []).filter((id: string) => validIds.has(id)).slice(0, 4);
-    if (!items.length) throw new Error("no valid ids");
-    return NextResponse.json(
-      { items, reason: parsed.reason || "Here are a few that fit.", source: "ai" },
-      { headers: { "Cache-Control": "no-store" } }
-    );
-  } catch {
-    console.log("[recommend] invalid JSON from AI, fallback");
-    const fb = fallbackRecommend(prompt, menu);
-    return NextResponse.json(
-      { items: fb.candidates.map((p) => p.id), reason: `From "${prompt}" — here are a few that fit.`, source: "fallback" },
-      { headers: { "Cache-Control": "no-store" } }
-    );
-  }
+  // Fallback path
+  console.log("[recommend] using fallback");
+  const fb = fallbackRecommend(prompt, menu);
+  return NextResponse.json(
+    {
+      items: fb.candidates.map((p) => p.id),
+      reasons: fb.candidates.map((p) => `Good pick for "${prompt}"`),
+      reason: `From "${prompt}" — here are a few that fit your mood and budget.`,
+      note: "Basic search used (no AI key or AI unavailable).",
+      source: "fallback",
+    },
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }

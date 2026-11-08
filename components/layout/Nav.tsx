@@ -7,7 +7,8 @@ import { useCart } from "@/store/cart";
 import { CartDrawer } from "../cart/CartDrawer";
 import { useLocation } from "@/store/location";
 import { useAuth } from "@/store/auth";
-import { OUTLETS, getOutlet } from "@/lib/menu";
+import { SignInModal } from "@/components/auth/SignInModal";
+import { OUTLETS, getOutlet, menuForOutlet } from "@/lib/menu";
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -24,18 +25,38 @@ export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
   const count = useCart((s) => s.count());
   const isDrawerOpen = useCart((s) => s.isDrawerOpen);
   const setDrawerOpen = useCart((s) => s.setDrawerOpen);
   const outletId = useLocation((s) => s.outletId);
   const setOutletId = useLocation((s) => s.setOutletId);
   const outlet = getOutlet(outletId);
+  const menuCount = menuForOutlet(outletId).length;
   const user = useAuth((s) => s.user);
   const isAuthenticated = useAuth((s) => s.isAuthenticated);
+  const logout = useAuth((s) => s.logout);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setAuthOpen(false);
+        setOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      console.log("[location] selected outlet:", outletId, "items:", menuCount);
+    }
+  }, [outletId, menuCount]);
 
   return (
     <>
@@ -95,25 +116,34 @@ export function Nav() {
             </button>
 
             {isAuthenticated && user ? (
-              <Link
-                href="/account"
-                prefetch={true}
-                className="hidden sm:inline-flex items-center gap-1.5 rounded-full glass px-3.5 py-2 text-xs sm:text-sm font-semibold text-navy dark:text-white hover:bg-white/60 dark:hover:bg-white/15 transition min-h-[40px]"
-                aria-label="My Account"
-              >
-                <span className="size-5 rounded-full bg-skyx-500 text-white text-[10px] grid place-items-center font-bold">
-                  {user.name.charAt(0)}
-                </span>
-                <span className="truncate max-w-[75px]">{user.name.split(" ")[0]}</span>
-              </Link>
+              <>
+                <Link
+                  href="/account"
+                  prefetch={true}
+                  className="hidden sm:inline-flex items-center gap-1.5 rounded-full glass px-3.5 py-2 text-xs sm:text-sm font-semibold text-navy dark:text-white hover:bg-white/60 dark:hover:bg-white/15 transition min-h-[40px]"
+                  aria-label="My Account"
+                >
+                  <span className="size-5 rounded-full bg-skyx-500 text-white text-[10px] grid place-items-center font-bold">
+                    {user.name.charAt(0)}
+                  </span>
+                  <span className="truncate max-w-[75px]">{user.name.split(" ")[0]}</span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="hidden sm:inline-flex rounded-full px-3 py-2 text-xs font-semibold text-navy/60 dark:text-white/60 hover:text-coral transition min-h-[40px]"
+                >
+                  Sign out
+                </button>
+              </>
             ) : (
-              <Link
-                href="/login"
-                prefetch={true}
+              <button
+                type="button"
+                onClick={() => setAuthOpen(true)}
                 className="hidden sm:inline-flex items-center rounded-full glass px-3.5 py-2 text-xs sm:text-sm font-semibold text-navy dark:text-white hover:bg-white/60 dark:hover:bg-white/15 transition min-h-[40px]"
               >
-                Sign In
-              </Link>
+                Sign in
+              </button>
             )}
 
             <button
@@ -162,14 +192,32 @@ export function Nav() {
                 </li>
               ))}
               <li className="pt-2 border-t border-navy/10 dark:border-white/10 flex gap-2">
-                <Link
-                  href={isAuthenticated ? "/account" : "/login"}
-                  prefetch={true}
-                  onClick={() => setOpen(false)}
-                  className="flex-1 text-center rounded-2xl py-2.5 bg-white/70 dark:bg-white/10 font-semibold"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    if (isAuthenticated) {
+                      // already signed in
+                    } else {
+                      setAuthOpen(true);
+                    }
+                  }}
+                  className="flex-1 rounded-2xl py-2.5 bg-white/70 dark:bg-white/10 font-semibold"
                 >
                   {isAuthenticated ? "My Account" : "Sign In / Register"}
-                </Link>
+                </button>
+                {isAuthenticated && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      logout();
+                      setOpen(false);
+                    }}
+                    className="rounded-2xl px-4 py-2.5 bg-coral/15 text-coral font-semibold"
+                  >
+                    Sign out
+                  </button>
+                )}
               </li>
             </ul>
           </div>
@@ -177,6 +225,7 @@ export function Nav() {
       </header>
 
       <CartDrawer open={isDrawerOpen} onClose={() => setDrawerOpen(false)} />
+      <SignInModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </>
   );
 }

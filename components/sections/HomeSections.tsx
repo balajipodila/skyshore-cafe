@@ -184,8 +184,8 @@ export function TodaySpecials() {
           <SkeletonCards />
         ) : (
           <div className="grid gap-5 md:grid-cols-3">
-            {daily.specials.map((m) => (
-              <ProductCard key={m.id} item={m} />
+            {daily.specials.map((m, i) => (
+              <ProductCard key={m.id} item={m} priority={i === 0} />
             ))}
           </div>
         )}
@@ -233,11 +233,11 @@ export function StoryTeaser() {
     <section aria-labelledby="story" className="mx-3 sm:mx-6 max-w-7xl lg:mx-auto mt-14 grid gap-6 lg:grid-cols-12 items-start">
       <div className="lg:col-span-5 relative">
         <Image
-          src="/founder-optimized.jpg"
+          src="/founder.jpg"
           alt="Podila Balaji, founder of Skyshore"
           width={800}
           height={600}
-          className="rounded-[28px] object-cover aspect-[4/5] lg:aspect-auto lg:h-[520px] w-full"
+          className="rounded-[28px] object-cover object-top aspect-[4/5] lg:aspect-auto lg:h-[520px] w-full"
         />
         <div className="glass absolute -bottom-5 -right-2 sm:gap-3 rounded-2xl px-4 py-3 max-w-[240px]">
           <p className="text-xs uppercase tracking-widest font-semibold">Since 2019</p>

@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { RecommendChat } from "@/components/chat/RecommendChat";
 import { LocationProvider } from "@/components/location/LocationProvider";
 import { CartAddPopup } from "@/components/cart/CartAddPopup";
+import { ToastContainer } from "@/components/ui/Toast";
 
 export const metadata: Metadata = {
   title: "Skyshore Café — Where the Sky Meets the Sea",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RecommendChat />
         <LocationProvider />
         <CartAddPopup />
+        <ToastContainer />
       </body>
     </html>
   );

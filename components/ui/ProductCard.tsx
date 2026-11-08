@@ -7,7 +7,7 @@ import { useCart } from "@/store/cart";
 import { Badge } from "./Badge";
 import { formatINR } from "@/lib/data";
 
-export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: string }) {
+export function ProductCard({ item, localCity, priority = false }: { item: MenuItem; localCity?: string; priority?: boolean }) {
   const add = useCart((s) => s.add);
   const basePrice = item.sizes[0]?.price ?? 0;
   const [added, setAdded] = useState(false);
@@ -27,7 +27,8 @@ export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: s
           fill
           className="object-cover group-hover:scale-[1.08] transition duration-700"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          loading="lazy"
+          priority={priority}
+          loading={priority ? "eager" : "lazy"}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <span className="absolute top-3 left-3 glass rounded-full px-2.5 py-1 text-xs font-semibold group-hover:scale-105 transition-transform">

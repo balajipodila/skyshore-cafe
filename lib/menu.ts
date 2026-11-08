@@ -37,6 +37,9 @@ export function menuForOutlet(outletId: string): MenuItem[] {
       seen.add(item.id);
     }
   }
+  if (process.env.NODE_ENV === "development") {
+    console.log("[menu] outlet", outletId, "items", out.length);
+  }
   return out;
 }
 

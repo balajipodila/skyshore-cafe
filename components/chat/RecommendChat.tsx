@@ -19,17 +19,17 @@ export function RecommendChat() {
   const outletId = useLocation((s) => s.outletId);
 
   async function send() {
-    const text = input.trim();
-    if (!text) return;
+    const currentInput = input.trim(); // Capture CURRENT value explicitly
+    if (!currentInput) return;
     setInput("");
-    setMessages((m) => [...m, { role: "user", text }]);
+    setMessages((m) => [...m, { role: "user", text: currentInput }]);
     setLoading(true);
     try {
       const res = await fetch("/api/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         cache: "no-store",
-        body: JSON.stringify({ prompt: text, outletId }),
+        body: JSON.stringify({ prompt: currentInput, outletId }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Could not fetch recommendations");
@@ -39,7 +39,7 @@ export function RecommendChat() {
         .filter(Boolean) as MenuItem[];
       setMessages((m) => [
         ...m,
-        { role: "ai", text: data.reason || "Here are a few that fit.", items, source: data.source },
+        { role: "ai", text: data.reason || data.note || "Here are a few that fit.", items, source: data.source },
       ]);
     } catch {
       setMessages((m) => [...m, { role: "ai", text: "I hit a wave. Try again in a moment." }]);
@@ -62,7 +62,7 @@ export function RecommendChat() {
 
       {open && (
         <section
-          className="fixed bottom-24 right-4 sm:right-5 z-40 glass w-[min(92vw,420px)] rounded-[24px] p-4 max-h-[70vh] flex flex-col"
+          className="fixed bottom-24 right-4 sm:right-5 z-40 glass w-[min(92vw,420px)] rounded-[24px] p-4 max-h-[70vh] flex flex-col animate-pop-in"
           aria-label="Menu recommender"
         >
           <h2 className="font-serif text-xl font-semibold">Skyshore recommender</h2>

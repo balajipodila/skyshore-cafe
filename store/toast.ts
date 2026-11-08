@@ -1,5 +1,6 @@
 "use client";
 import { create } from "zustand";
+import { DEFAULT_OUTLET_ID } from "@/lib/menu";
 
 export type Toast = {
   id: string;
@@ -18,7 +19,6 @@ export const useToast = create<ToastState>((set) => ({
   add: (message, type = "success") => {
     const id = Math.random().toString(36).substring(7);
     set((state) => ({ toasts: [...state.toasts, { id, message, type }] }));
-    // Auto remove after 3 seconds
     setTimeout(() => {
       set((state) => ({ toasts: state.toasts.filter((t) => t.id !== id) }));
     }, 3000);

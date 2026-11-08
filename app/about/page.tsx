@@ -1,7 +1,10 @@
 import Image from "next/image";
+import { useState } from "react";
 import { GlassCard } from "@/components/ui/GlassCard";
 
 export default function AboutPage() {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <div className="mx-3 sm:mx-6 max-w-6xl lg:mx-auto">
       <header className="glass rounded-[28px] p-6 sm:p-8">
@@ -11,8 +14,27 @@ export default function AboutPage() {
 
       <section aria-labelledby="owner" className="mt-6 grid lg:grid-cols-12 gap-6 items-start">
         <div className="lg:col-span-4">
-          <div className="relative overflow-hidden rounded-[24px] h-[420px]">
-            <Image src="/founder-optimized.jpg" alt="Podila Balaji, founder of Skyshore" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
+          <div className="relative overflow-hidden rounded-[24px] h-[420px] bg-skyx-100 dark:bg-white/10">
+            {!imageError ? (
+              <Image
+                src="/founder.jpg"
+                alt="Podila Balaji, founder of Skyshore"
+                width={800}
+                height={600}
+                className="object-cover object-top w-full h-full"
+                onError={() => setImageError(true)}
+                priority={false}
+              />
+            ) : (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-skyx-200 via-aqua/50 to-sand/80 dark:from-navy dark:via-skyx-900/30 dark:to-navy p-8">
+                <span className="size-24 rounded-full bg-coral text-white text-4xl font-bold grid place-items-center shadow-lift">PB</span>
+                <p className="mt-4 font-serif text-2xl font-semibold text-navy dark:text-white">Podila Balaji</p>
+                <p className="text-xs text-navy/60 dark:text-white/60 mt-1">Founder</p>
+                <p className="mt-6 text-xs text-center text-navy/50 dark:text-white/50 max-w-[220px]">
+                  Image missing — place your photo at `/public/founder.jpg` for a perfect portrait.
+                </p>
+              </div>
+            )}
             <div className="absolute bottom-3 left-3 glass rounded-2xl px-4 py-3 max-w-[260px]">
               <p className="font-serif font-semibold">Podila Balaji (Bobby)</p>
               <p className="text-xs">Founder</p>
