@@ -21,32 +21,38 @@ export function getOutlet(id: string | null | undefined): Outlet {
 // Core = items NOT appearing in any outlet's localItemIds. Each outlet sees its own core + its own locals only.
 const LOCAL_UNION = new Set(OUTLETS.flatMap((o) => o.localItemIds ?? []));
 
+// Precompute core once — avoids scanning ALL_MENU on every call
+const CORE_ITEMS: MenuItem[] = ALL_MENU.filter((m) => !LOCAL_UNION.has(m.id));
+const BY_ID = new Map(ALL_MENU.map((m) => [m.id, m]));
+
+// Module-level cache: menu data is static, so cache per outletId
+const _cache = new Map<string, MenuItem[]>();
+
 /** CORE items (available everywhere) + that outlet's LOCAL items ONLY. */
 export function menuForOutlet(outletId: string): MenuItem[] {
+  if (_cache.has(outletId)) return _cache.get(outletId)!;
+
   const outlet = getOutlet(outletId);
-  const byId = new Map(ALL_MENU.map((m) => [m.id, m]));
   const out: MenuItem[] = [];
   const seen = new Set<string>();
 
   // 1. This outlet's local items
   for (const id of outlet.localItemIds ?? []) {
-    const item = byId.get(id);
+    const item = BY_ID.get(id);
     if (item && !seen.has(item.id)) {
       out.push(item);
       seen.add(item.id);
     }
   }
-  // 2. Core items (NOT in any outlet's local union)
-  for (const item of ALL_MENU) {
-    if (LOCAL_UNION.has(item.id)) continue; // skip other cities' locals
+  // 2. Core items
+  for (const item of CORE_ITEMS) {
     if (!seen.has(item.id)) {
       out.push(item);
       seen.add(item.id);
     }
   }
-  if (process.env.NODE_ENV === "development") {
-    console.log("[menu] outlet", outletId, "items", out.length);
-  }
+
+  _cache.set(outletId, out);
   return out;
 }
 

@@ -1,5 +1,5 @@
 import combos from "@/data/combos.json";
-import { menuForOutlet } from "./menu";
+import { menuForOutlet, OUTLETS } from "./menu";
 import type { MenuItem } from "./types";
 
 export type Combo = (typeof combos)[number];
@@ -71,8 +71,13 @@ const CHEF_NOTES: Record<string, string> = {
 export function chefsSpecial(outletId: string, dateOverride?: string): { item: MenuItem; note: string } | null {
   const date = outletDateString(new Date(), dateOverride ?? getDateOverride());
   const menu = menuForOutlet(outletId);
-  // Only meals or desserts or premium/signature — never plain drinks
-  const eligible = menu.filter((m) => m.category === "meal" || m.category === "dessert" || m.premium);
+  // Only premium (>=399), premium flag, signature tag, and outlet-local items. Never plain burgers/pizza/thali.
+  const outlet = OUTLETS.find((o) => o.id === outletId);
+  const localIds = new Set(outlet?.localItemIds ?? []);
+  const eligible = menu.filter((m) => {
+    const base = m.sizes[0]?.price ?? 0;
+    return base >= 399 || m.premium || m.tags.includes("signature") || localIds.has(m.id);
+  });
   const rotated = rotate(eligible.length ? eligible : menu, `${date}:${outletId}:chef`);
   const pick = rotated[0];
   return { item: pick, note: CHEF_NOTES[pick.id] ?? "Picked because it tastes like the sea at its best — fresh, warm and honest." };

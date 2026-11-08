@@ -3456,5 +3456,144 @@
     "premium": true,
     "temp": "hot",
     "isCoffee": false
+  },
+  {
+    "id": "cold-brew-reserve",
+    "name": "Cold Brew Reserve",
+    "category": "drink",
+    "description": "Slow-steeped 18-hour cold brew, low acidity, served over artisan ice with optional tonic.",
+    "veg": true,
+    "sizes": [
+      {
+        "label": "S",
+        "price": 249
+      },
+      {
+        "label": "M",
+        "price": 299
+      },
+      {
+        "label": "L",
+        "price": 349
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=900&q=80",
+    "tags": [
+      "premium",
+      "coffee",
+      "cold"
+    ],
+    "spice": 0,
+    "prepTime": 12,
+    "popularity": 88,
+    "nutrition": {
+      "calories": 45,
+      "protein": 1,
+      "carbs": 4,
+      "fat": 1,
+      "sugar": 2,
+      "fibre": 0
+    },
+    "allergens": [
+      "caffeine"
+    ],
+    "label": "Light",
+    "hot": false,
+    "temp": "cold",
+    "caffeineFree": false,
+    "premium": true,
+    "isCoffee": true
+  },
+  {
+    "id": "vietnamese-egg-coffee",
+    "name": "Vietnamese Egg Coffee",
+    "category": "drink",
+    "description": "Whipped egg yolk, sweetened condensed milk, strong Vietnamese robusta — creamy and warm.",
+    "veg": true,
+    "sizes": [
+      {
+        "label": "M",
+        "price": 329
+      },
+      {
+        "label": "L",
+        "price": 399
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80",
+    "tags": [
+      "premium",
+      "coffee",
+      "signature"
+    ],
+    "spice": 0,
+    "prepTime": 10,
+    "popularity": 90,
+    "nutrition": {
+      "calories": 220,
+      "protein": 5,
+      "carbs": 18,
+      "fat": 14,
+      "sugar": 16,
+      "fibre": 0
+    },
+    "allergens": [
+      "egg",
+      "milk",
+      "caffeine"
+    ],
+    "label": "Indulgent",
+    "hot": true,
+    "temp": "hot",
+    "caffeineFree": false,
+    "premium": true,
+    "isCoffee": true
+  },
+  {
+    "id": "affogato-premium",
+    "name": "Affogato Premium",
+    "category": "dessert",
+    "description": "Double espresso poured over single-origin vanilla gelato, almond crumble and saffron drizzle.",
+    "veg": true,
+    "sizes": [
+      {
+        "label": "Glass",
+        "price": 349
+      },
+      {
+        "label": "With shot",
+        "price": 449
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=900&q=80",
+    "tags": [
+      "premium",
+      "coffee",
+      "dessert",
+      "sweet"
+    ],
+    "spice": 0,
+    "prepTime": 8,
+    "popularity": 92,
+    "nutrition": {
+      "calories": 280,
+      "protein": 6,
+      "carbs": 28,
+      "fat": 15,
+      "sugar": 22,
+      "fibre": 1
+    },
+    "allergens": [
+      "milk",
+      "egg",
+      "caffeine",
+      "nuts"
+    ],
+    "label": "Indulgent",
+    "hot": false,
+    "temp": "cold",
+    "caffeineFree": false,
+    "premium": true,
+    "isCoffee": true
   }
 ]

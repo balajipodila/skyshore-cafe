@@ -32,7 +32,7 @@ export function Nav() {
   const outletId = useLocation((s) => s.outletId);
   const setOutletId = useLocation((s) => s.setOutletId);
   const outlet = getOutlet(outletId);
-  const menuCount = menuForOutlet(outletId).length;
+  const menuCount = menuForOutlet(outletId).length; // cached — cheap
   const user = useAuth((s) => s.user);
   const isAuthenticated = useAuth((s) => s.isAuthenticated);
   const logout = useAuth((s) => s.logout);

@@ -19,7 +19,7 @@ export function RecommendChat() {
   const outletId = useLocation((s) => s.outletId);
 
   async function send() {
-    const currentInput = input.trim(); // Capture CURRENT value explicitly
+    const currentInput = input.trim();
     if (!currentInput) return;
     setInput("");
     setMessages((m) => [...m, { role: "user", text: currentInput }]);
