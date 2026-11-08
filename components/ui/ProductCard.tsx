@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import type { MenuItem } from "@/lib/types";
 import { useCart } from "@/store/cart";
 import { Badge } from "./Badge";
@@ -9,6 +10,13 @@ import { formatINR } from "@/lib/data";
 export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: string }) {
   const add = useCart((s) => s.add);
   const basePrice = item.sizes[0]?.price ?? 0;
+  const [added, setAdded] = useState(false);
+
+  async function handleAdd() {
+    add({ id: item.id, name: item.name, price: basePrice, qty: 1, size: item.sizes[0]?.label, image: item.image });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1200);
+  }
 
   return (
     <article className="group glass-soft rounded-[22px] overflow-hidden p-0 hover:-translate-y-1.5 hover:shadow-lift transition-all duration-300 animate-fade-in-up">
@@ -19,6 +27,7 @@ export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: s
           fill
           className="object-cover group-hover:scale-[1.08] transition duration-700"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <span className="absolute top-3 left-3 glass rounded-full px-2.5 py-1 text-xs font-semibold group-hover:scale-105 transition-transform">
@@ -60,6 +69,7 @@ export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: s
         <div className="mt-4 flex items-center gap-2">
           <Link
             href={`/menu/${item.id}`}
+            prefetch={true}
             className="flex-1 text-center rounded-full py-2.5 text-sm font-semibold border border-navy/10 dark:border-white/15 hover:bg-white/50 dark:hover:bg-white/10 transition hover:border-skyx-400"
             aria-label={`View ${item.name}`}
           >
@@ -67,13 +77,15 @@ export function ProductCard({ item, localCity }: { item: MenuItem; localCity?: s
           </Link>
           <button
             type="button"
-            onClick={() =>
-              add({ id: item.id, name: item.name, price: basePrice, qty: 1, size: item.sizes[0]?.label, image: item.image })
-            }
-            className="flex-1 rounded-full bg-navy text-white dark:bg-white dark:text-navy py-2.5 text-sm font-semibold hover:bg-coral hover:text-white hover:scale-[1.02] active:scale-95 transition-all shadow-sm hover:shadow-md"
+            onClick={handleAdd}
+            className={`flex-1 rounded-full py-2.5 text-sm font-semibold transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 ${
+              added
+                ? "bg-emerald-500 text-white"
+                : "bg-navy text-white dark:bg-white dark:text-navy hover:bg-coral hover:text-white"
+            }`}
             aria-label={`Add ${item.name} to cart`}
           >
-            Quick add
+            {added ? "✓ Added!" : "Quick add"}
           </button>
         </div>
       </div>
